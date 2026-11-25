@@ -24,7 +24,7 @@
   const fold = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
   const genName = g => GEN_NAMES[g] ?? `Đời thứ ${g}`;
 
-  fetch("data/gia-pha.json").then(r => r.json()).then(init).catch(err => {
+  fetch(`data/gia-pha.json?v=${window.APP_VERSION || ""}`).then(r => r.json()).then(init).catch(err => {
     document.getElementById("stage").innerHTML = `<p style="padding:24px">Không tải được dữ liệu: ${esc(err.message)}</p>`;
   });
 
@@ -50,7 +50,7 @@
     return new Promise((ok, fail) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = () => fail(new Error(src)); document.head.appendChild(s); });
   }
   function load3d() {
-    loading3d = loading3d || ["view3d.js"]
+    loading3d = loading3d || [`view3d.js?v=${window.APP_VERSION || ""}`]
       .reduce((p, src) => p.then(() => loadScript(src)), Promise.resolve());
     return loading3d;
   }

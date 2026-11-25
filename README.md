@@ -26,3 +26,5 @@ python3 -m http.server 8000
 ```
 
 rồi mở http://localhost:8000. Trang là HTML/JS tĩnh (d3 v7 đặt trong `vendor/`), nên host thẳng bằng GitHub Pages.
+
+Trước mỗi lần đăng bản mới, chạy `sh tools/stamp.sh` để đổi số phiên bản, tránh trình duyệt dùng lại file cũ.

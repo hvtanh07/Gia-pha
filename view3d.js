@@ -219,7 +219,9 @@ window.Tree3D = (() => {
   }
 
   function init(el, people, opts) {
-    host = el; onPick = opts.pick; onToggle = opts.toggle; stateOf = opts.state;
+    host = el;
+    if (typeof opts === "function") opts = { pick: opts }; // older app.js still in a browser cache
+    onPick = opts.pick; onToggle = opts.toggle || null; if (opts.state) stateOf = opts.state;
     cv = document.createElement("canvas"); cv.style.touchAction = "none"; cv.style.display = "block";
     host.appendChild(cv); ctx = cv.getContext("2d");
     readColors(); layout(people); resize();
