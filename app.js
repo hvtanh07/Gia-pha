@@ -1,7 +1,9 @@
 /* Cây gia phả họ Hứa – d3 v7 */
 (() => {
   "use strict";
-  const CARD_W = 210, CARD_H = 54, GAP_Y = 68, GAP_X = 270, DUR = 350;
+  const DUR = 350;
+  const isMobile = () => window.matchMedia("(max-width: 720px)").matches;
+  let VERT = isMobile();
   const GEN_NAMES = ["Thủy tổ", "Đời thứ nhất", "Đời thứ hai", "Đời thứ ba", "Đời thứ tư",
     "Đời thứ năm", "Đời thứ sáu", "Đời thứ bảy", "Đời thứ tám", "Đời thứ chín"];
 
@@ -31,10 +33,11 @@
     const strat = d3.stratify().id(d => d.id).parentId(d => d.parent);
     root = strat(data.people);
     root.each(d => { byId.set(d.id, d); d._kids = d.children; });
-    collapseTo(3);
+    collapseTo(VERT ? 2 : 3);
     update(root);
     fit(false);
     bindUI();
+    showTip();
     const hash = decodeURIComponent(location.hash.slice(1));
     let want = new URLSearchParams(location.search).get("che-do");
     if (!want) { try { want = localStorage.getItem("giapha-mode"); } catch (e) {} }
@@ -47,7 +50,7 @@
     return new Promise((ok, fail) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = () => fail(new Error(src)); document.head.appendChild(s); });
   }
   function load3d() {
-    loading3d = loading3d || ["vendor/three.min.js", "vendor/three-spritetext.min.js", "vendor/3d-force-graph.min.js", "view3d.js"]
+    loading3d = loading3d || ["view3d.js"]
       .reduce((p, src) => p.then(() => loadScript(src)), Promise.resolve());
     return loading3d;
   }
@@ -55,7 +58,7 @@
     const btn = document.getElementById("mode"), host = document.getElementById("tree3d");
     if (m === "3d") {
       btn.disabled = true; btn.textContent = "Đang tải…";
-      try { await load3d(); } catch (e) { btn.disabled = false; btn.textContent = "3D"; alertBox("Không tải được chế độ 3D."); return; }
+      try { await load3d(); } catch (e) { btn.disabled = false; btn.textContent = "Xem 3D"; alertBox("Không tải được chế độ 3D."); return; }
       host.hidden = false; svg.style("display", "none");
       if (!T3) {
         T3 = window.Tree3D.init(host, DATA.people, id => id ? select(id, false) : closePanel());
@@ -69,16 +72,16 @@
     }
     mode = m;
     document.body.classList.toggle("is3d", m === "3d");
-    btn.textContent = m === "3d" ? "2D" : "3D";
+    btn.textContent = m === "3d" ? "Xem 2D" : "Xem 3D";
     btn.title = m === "3d" ? "Chuyển sang sơ đồ 2D" : "Chuyển sang chế độ 3D";
     try { localStorage.setItem("giapha-mode", m); } catch (e) {}
   }
   function alertBox(msg) { const p = document.createElement("div"); p.className = "toast"; p.textContent = msg; document.body.appendChild(p); setTimeout(() => p.remove(), 3000); }
 
   function collapseTo(depth) {
-    root.each(d => { d.children = d.depth < depth ? d._kids : null; });
+    for (const d of byId.values()) d.children = d.depth < depth ? d._kids : null;
   }
-  function expandAll() { root.each(d => { d.children = d._kids; }); }
+  function expandAll() { for (const d of byId.values()) d.children = d._kids; }
   function revealPath(d) { for (let a = d.parent; a; a = a.parent) a.children = a._kids; }
 
   function lifeLine(p) {
@@ -89,93 +92,179 @@
   }
   function trunc(s, n) { return s.length > n ? s.slice(0, n - 1) + "…" : s; }
 
-  function update(source) {
-    const layout = d3.tree().nodeSize([GAP_Y, GAP_X]).separation((a, b) => a.parent === b.parent ? 1 : 1.15);
-    layout(root);
-    const nodes = root.descendants(), links = root.links();
-    const x0 = source.x0 ?? source.x, y0 = source.y0 ?? source.y;
+  // Desktop: tree grows left → right. Phone (portrait): tree grows bottom → up.
+  function dims() {
+    return VERT ? { W: 160, H: 58, SIB: 176, GEN: 150 } : { W: 214, H: 58, SIB: 72, GEN: 300 };
+  }
+  function place(d) {
+    if (VERT) { d.px = d.x; d.py = -d.y; } else { d.px = d.y; d.py = d.x; }
+  }
+  const pillText = d => d.children ? "Thu gọn" : `${d._kids.length} con`;
+  const pillW = d => 30 + pillText(d).length * 7.2;
 
-    // generation guides
-    const minX = d3.min(nodes, d => d.x) - 60, maxX = d3.max(nodes, d => d.x) + 60;
-    const depths = [...new Set(nodes.map(d => d.depth))];
-    const gl = gGen.selectAll("g.gen").data(depths, d => d);
+  function update(source) {
+    const D = dims();
+    d3.tree().nodeSize([D.SIB, D.GEN]).separation((a, b) => a.parent === b.parent ? 1 : 1.12)(root);
+    const nodes = root.descendants(), links = root.links();
+    nodes.forEach(place);
+    const sx0 = source.px0 ?? source.px, sy0 = source.py0 ?? source.py;
+
+    // generation labels
+    const byDepth = d3.group(nodes, d => d.depth);
+    const gens = [...byDepth.keys()];
+    const minPy = d3.min(nodes, d => d.py), maxPy = d3.max(nodes, d => d.py);
+    const gl = gGen.selectAll("g.gen").data(gens, d => d);
     const glE = gl.enter().append("g").attr("class", "gen");
     glE.append("line").attr("class", "genline");
-    glE.append("text").attr("class", "genlabel").attr("text-anchor", "middle");
+    glE.append("text").attr("class", "genlabel");
     gl.exit().remove();
-    gGen.selectAll("g.gen").select("line").transition().duration(DUR)
-      .attr("x1", d => d * GAP_X).attr("x2", d => d * GAP_X).attr("y1", minX + 10).attr("y2", maxX);
-    gGen.selectAll("g.gen").select("text").text(d => genName(d)).transition().duration(DUR)
-      .attr("x", d => d * GAP_X).attr("y", minX - 4);
+    const gAll = gGen.selectAll("g.gen");
+    if (VERT) {
+      const minPx = d3.min(nodes, d => d.px) - D.W / 2 - 14, maxPx = d3.max(nodes, d => d.px) + D.W / 2 + 14;
+      gAll.select("line").attr("x1", minPx).attr("x2", maxPx).attr("y1", g => -g * D.GEN + D.H / 2 + 8).attr("y2", g => -g * D.GEN + D.H / 2 + 8);
+      gAll.select("text").text(genName).attr("text-anchor", "start")
+        .attr("x", g => d3.min(byDepth.get(g), d => d.px) - D.W / 2).attr("y", g => -g * D.GEN + D.H / 2 + 24);
+    } else {
+      gAll.select("line").attr("x1", g => g * D.GEN).attr("x2", g => g * D.GEN).attr("y1", minPy - 40).attr("y2", maxPy + 50);
+      gAll.select("text").text(genName).attr("text-anchor", "middle").attr("x", g => g * D.GEN).attr("y", minPy - 50);
+    }
 
-    // links
-    const diag = (s, t) => `M${s.y + CARD_W / 2},${s.x}C${(s.y + t.y) / 2 + CARD_W / 4},${s.x} ${(s.y + t.y) / 2 + CARD_W / 4},${t.x} ${t.y - CARD_W / 2},${t.x}`;
+    // links (from the parent's expand button to the child's card)
+    const path = (s, t) => {
+      if (VERT) {
+        const y1 = s.py - D.H / 2 - 26, y2 = t.py + D.H / 2, m = (y1 + y2) / 2;
+        return `M${s.px},${y1}C${s.px},${m} ${t.px},${m} ${t.px},${y2}`;
+      }
+      const x1 = s.px + D.W / 2 + (s._kids ? pillW(s) + 4 : 0), x2 = t.px - D.W / 2, m = (x1 + x2) / 2;
+      return `M${x1},${s.py}C${m},${s.py} ${m},${t.py} ${x2},${t.py}`;
+    };
+    const stub = p => path(p, { px: p.px + (VERT ? 0 : D.W), py: p.py - (VERT ? D.H : 0) });
     const link = gLinks.selectAll("path.link").data(links, d => d.target.id);
     link.enter().append("path").attr("class", "link")
-      .attr("d", () => diag({ x: x0, y: y0 }, { x: x0, y: y0 + CARD_W }))
-      .merge(link).transition().duration(DUR).attr("d", d => diag(d.source, d.target));
-    link.exit().transition().duration(DUR)
-      .attr("d", () => diag({ x: source.x, y: source.y }, { x: source.x, y: source.y + CARD_W })).remove();
+      .attr("d", () => stub({ px: sx0, py: sy0, _kids: source._kids, children: source.children }))
+      .merge(link).transition().duration(DUR).attr("d", d => path(d.source, d.target));
+    link.exit().transition().duration(DUR).attr("d", () => stub(source)).remove();
 
     // nodes
     const node = gNodes.selectAll("g.node").data(nodes, d => d.id);
     const nE = node.enter().append("g")
-      .attr("transform", `translate(${y0},${x0})`).attr("opacity", 0)
-      .on("click", (e, d) => { e.stopPropagation(); select(d.id); });
-    nE.append("rect").attr("class", "card").attr("x", -CARD_W / 2).attr("y", -CARD_H / 2)
-      .attr("width", CARD_W).attr("height", CARD_H);
-    nE.append("text").attr("class", "nm").attr("x", -CARD_W / 2 + 12).attr("y", -4);
-    nE.append("text").attr("class", "lf").attr("x", -CARD_W / 2 + 12).attr("y", 15);
-    const tg = nE.append("g").attr("class", "toggle").attr("transform", `translate(${CARD_W / 2},0)`)
+      .attr("transform", `translate(${sx0},${sy0})`).attr("opacity", 0)
+      .on("click", (e, d) => { e.stopPropagation(); openPerson(d); });
+    nE.append("rect").attr("class", "card");
+    nE.append("text").attr("class", "nm");
+    nE.append("text").attr("class", "lf");
+    nE.append("text").attr("class", "info").text("ⓘ");
+    const tg = nE.append("g").attr("class", "pill").attr("role", "button")
       .on("click", (e, d) => { e.stopPropagation(); toggle(d); });
-    tg.append("circle").attr("r", 11);
-    tg.append("text").attr("text-anchor", "middle").attr("dy", "0.35em");
+    tg.append("rect").attr("class", "pill-bg");
+    tg.append("path").attr("class", "chev");
+    tg.append("text").attr("class", "pill-t");
     nE.append("title");
 
     const nAll = nE.merge(node);
     nAll.attr("class", d => `node ${d.data.sex}${d.data.issue ? " issue" : ""}${d.id === selectedId ? " selected" : ""}${hitIds.has(d.id) ? " hit" : ""}`);
-    nAll.select(".nm").text(d => trunc(d.data.name, 24));
-    nAll.select(".lf").text(d => {
+    nAll.select("rect.card").attr("x", -D.W / 2).attr("y", -D.H / 2).attr("width", D.W).attr("height", D.H);
+    nAll.select(".nm").attr("x", -D.W / 2 + 12).attr("y", -4).text(d => trunc(d.data.name, VERT ? 18 : 24));
+    nAll.select(".lf").attr("x", -D.W / 2 + 12).attr("y", 15).text(d => {
       const p = d.data, s = lifeLine(p), n = p.spouses?.length || 0;
       const sp = n > 1 ? `${n} bà vợ` : n === 1 && !/chưa/i.test(p.spouses[0].name) ? `Vợ: ${p.spouses[0].name}` : "";
-      return trunc([s, sp].filter(Boolean).join(" · "), 32);
+      return trunc([s, sp].filter(Boolean).join(" · "), VERT ? 22 : 32);
     });
-    nAll.select("title").text(d => d.data.name);
-    nAll.select(".toggle").style("display", d => d._kids ? null : "none")
-      .select("text").text(d => d.children ? "−" : d._kids ? String(d._kids.length) : "");
-    nAll.transition().duration(DUR).attr("opacity", 1).attr("transform", d => `translate(${d.y},${d.x})`);
-    node.exit().transition().duration(DUR).attr("opacity", 0)
-      .attr("transform", `translate(${source.y},${source.x})`).remove();
+    nAll.select(".info").attr("x", D.W / 2 - 18).attr("y", -D.H / 2 + 17);
+    nAll.select("title").text(d => `${d.data.name}: nhấn để xem chi tiết${d._kids ? " và mở các con" : ""}`);
 
-    nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+    const pills = nAll.select(".pill").style("display", d => d._kids ? null : "none")
+      .classed("open", d => !!d.children)
+      .attr("aria-label", d => d.children ? "Thu gọn nhánh" : `Mở ${d._kids?.length || 0} người con`);
+    pills.attr("transform", d => {
+      if (!d._kids) return null;
+      return VERT ? `translate(${-pillW(d) / 2},${-D.H / 2 - 26})` : `translate(${D.W / 2 + 4},${-12})`;
+    });
+    pills.select(".pill-bg").attr("width", d => d._kids ? pillW(d) : 0).attr("height", 24).attr("rx", 12);
+    // chevron points toward the children when closed, back toward the card when open
+    pills.select(".chev").attr("d", d => {
+      const up = VERT ? !d.children : !!d.children; // vertical: closed ▲, open ▼ ; horizontal: closed ▶, open ◀
+      if (VERT) return up ? "M9,15 L14,9 L19,15" : "M9,9 L14,15 L19,9";
+      return d.children ? "M17,7 L11,12 L17,17" : "M11,7 L17,12 L11,17";
+    });
+    pills.select(".pill-t").attr("x", 24).attr("y", 16.5).text(d => d._kids ? pillText(d) : "");
+
+    nAll.transition().duration(DUR).attr("opacity", 1).attr("transform", d => `translate(${d.px},${d.py})`);
+    node.exit().transition().duration(DUR).attr("opacity", 0)
+      .attr("transform", `translate(${source.px},${source.py})`).remove();
+
+    nodes.forEach(d => { d.px0 = d.px; d.py0 = d.py; });
+  }
+
+  // Tapping a card shows details and, if the branch is closed, opens it.
+  function openPerson(d) {
+    const opened = d._kids && !d.children;
+    if (opened) { d.children = d._kids; update(d); }
+    select(d.id);
+    if (opened) setTimeout(() => revealKids(d), DUR + 20);
+    dismissTip();
   }
 
   function toggle(d) {
     d.children = d.children ? null : d._kids;
     update(d);
+    if (d.children) setTimeout(() => revealKids(d), DUR + 20);
     if (selectedId === d.id) renderPanel(d);
+    dismissTip();
   }
 
   // ---------- view helpers ----------
   function size() { const r = svg.node().getBoundingClientRect(); return [r.width, r.height]; }
   function fit(animate = true) {
-    const nodes = root.descendants();
-    const x1 = d3.min(nodes, d => d.y) - CARD_W / 2 - 20, x2 = d3.max(nodes, d => d.y) + CARD_W / 2 + 30;
-    const y1 = d3.min(nodes, d => d.x) - CARD_H - 50, y2 = d3.max(nodes, d => d.x) + CARD_H + 20;
+    const D = dims(), nodes = root.descendants();
+    const x1 = d3.min(nodes, d => d.px) - D.W / 2 - 20, x2 = d3.max(nodes, d => d.px) + D.W / 2 + (VERT ? 20 : 110);
+    const y1 = d3.min(nodes, d => d.py) - D.H - 60, y2 = d3.max(nodes, d => d.py) + D.H + 20;
     const [w, h] = size();
-    let k = Math.min(1.2, 0.92 * Math.min(w / (x2 - x1), h / (y2 - y1)));
-    let tx = w / 2 - k * (x1 + x2) / 2;
-    if (k < 0.6) { k = 0.6; tx = 16 - k * x1; } // keep text readable on small screens; pan to see the rest
-    const t = d3.zoomIdentity.translate(tx, h / 2 - k * (y1 + y2) / 2).scale(k);
-    (animate ? svg.transition().duration(500) : svg).call(zoom.transform, t);
+    let k = Math.min(1.1, 0.92 * Math.min(w / (x2 - x1), h / (y2 - y1)));
+    let tx = w / 2 - k * (x1 + x2) / 2, ty = h / 2 - k * (y1 + y2) / 2;
+    const minK = VERT ? 0.72 : 0.6;
+    if (k < minK) {
+      k = minK; // keep text readable; the rest is reachable by dragging
+      if (VERT) { tx = w / 2 - k * root.px; ty = h - 76 - k * (root.py + D.H / 2); } // root at the bottom
+      else { tx = 16 - k * x1; }
+    }
+    (animate ? svg.transition().duration(500) : svg).call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(k));
   }
   function centerOn(d) {
     const [w, h] = size();
-    const mobile = window.matchMedia("(max-width: 720px)").matches;
-    const k = Math.max(d3.zoomTransform(svg.node()).k, 0.85);
+    const mobile = isMobile();
+    const k = Math.max(d3.zoomTransform(svg.node()).k, VERT ? 0.8 : 0.85);
     const cx = mobile ? w / 2 : (panel.hidden ? w / 2 : (w - 400) / 2);
-    const cy = mobile && !panel.hidden ? h * 0.28 : h / 2;
-    svg.transition().duration(600).call(zoom.transform, d3.zoomIdentity.translate(cx - k * d.y, cy - k * d.x).scale(k));
+    const cy = mobile && !panel.hidden ? (h - panel.offsetHeight) / 2 : h / 2;
+    svg.transition().duration(600).call(zoom.transform, d3.zoomIdentity.translate(cx - k * d.px, cy - k * d.py).scale(k));
+  }
+
+  // After a branch opens, slide the view so the person and their children are in sight.
+  function revealKids(d) {
+    if (!d.children) return;
+    const [w, h] = size(), D = dims(), t = d3.zoomTransform(svg.node()), k = t.k;
+    const xs = d.children.map(c => c.px), ys = d.children.map(c => c.py);
+    let cx, cy;
+    if (VERT) { // parent near the bottom of the view, children above it
+      cx = (d3.min(xs) + d3.max(xs)) / 2; if ((d3.max(xs) - d3.min(xs) + D.W) * k > w) cx = d.px;
+      const sheet = !panel.hidden ? panel.offsetHeight : 0;
+      const tx = w / 2 - k * cx, ty = (h - sheet) - (sheet ? 16 : 84) - k * (d.py + D.H / 2);
+      return svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(k));
+    }
+    cy = (d3.min(ys) + d3.max(ys)) / 2; if ((d3.max(ys) - d3.min(ys) + D.H) * k > h) cy = d.py;
+    const right = panel.hidden ? w : w - 400;
+    const tx = Math.min(t.x, right - 40 - k * (d.children[0].px + D.W / 2));
+    svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(Math.max(tx, 40 - k * (d.px - D.W / 2)), h / 2 - k * cy).scale(k));
+  }
+
+  // ---------- first-visit tip ----------
+  function showTip() {
+    let seen = null; try { seen = localStorage.getItem("giapha-tip"); } catch (e) {}
+    if (!seen) document.getElementById("tip").hidden = false;
+  }
+  function dismissTip() {
+    const t = document.getElementById("tip"); if (t.hidden) return;
+    t.hidden = true; try { localStorage.setItem("giapha-tip", "1"); } catch (e) {}
   }
 
   function focusPerson(id, center = true) {
@@ -285,7 +374,7 @@
     document.getElementById("mode").onclick = () => setMode(mode === "3d" ? "2d" : "3d");
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => T3 && T3.retheme());
     document.getElementById("expandAll").onclick = () => { expandAll(); update(root); setTimeout(fit, DUR); };
-    document.getElementById("collapseAll").onclick = () => { collapseTo(3); update(root); setTimeout(fit, DUR); };
+    document.getElementById("collapseAll").onclick = () => { collapseTo(VERT ? 2 : 3); update(root); setTimeout(fit, DUR); };
     document.getElementById("closePanel").onclick = closePanel;
     svg.on("click", closePanel);
     document.addEventListener("keydown", e => { if (e.key === "Escape" && !panel.hidden && document.activeElement !== q) closePanel(); });
@@ -311,7 +400,12 @@
     document.getElementById("info").onclick = () => { renderNotes(); dlg.showModal(); };
     document.getElementById("closeNotes").onclick = () => dlg.close();
     dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
-    window.addEventListener("resize", () => { if (panel.hidden) return; });
+    document.getElementById("tipOk").onclick = dismissTip;
+    let rz;
+    window.addEventListener("resize", () => {
+      clearTimeout(rz);
+      rz = setTimeout(() => { if (isMobile() !== VERT) { VERT = isMobile(); update(root); fit(false); } }, 150);
+    });
   }
 
   function closePanel() {
@@ -328,7 +422,9 @@
       <p>Tổng cộng ${DATA.people.length} người mang huyết thống trong cây (chưa kể vợ, chồng), qua ${new Set(DATA.people.map(p => p.gen)).size} đời.</p>
       <h3>Cách dùng</h3>
       <ul><li>Kéo để di chuyển, cuộn chuột hoặc chụm hai ngón tay để phóng to, thu nhỏ.</li>
-      <li>Nhấn vào một người để xem chi tiết. Nhấn vào nút tròn bên phải ô (số con) để mở hoặc thu gọn nhánh.</li>
+      <li>Nhấn vào ô tên để xem chi tiết và mở các con của người đó. Nút “▸ N con” mở nhánh, nút “Thu gọn” đóng nhánh.</li>
+      <li>Trên điện thoại, cây mọc từ dưới lên: Thủy tổ ở dưới cùng, con cháu ở phía trên.</li>
+      <li>Nút “Xem 3D” chuyển sang cây 3D hình nón: kéo để xoay, chụm hoặc cuộn để phóng to, nhấn vào tên để xem chi tiết.</li>
       <li>Ô tìm kiếm không cần gõ dấu, ví dụ “hua van hiep”, “1944”, “xom 4”.</li></ul>
       <h3>Ghi chú về dữ liệu</h3><ul>${m.sourceNotes.map(s => `<li>${esc(s)}</li>`).join("")}</ul>
       <h3>Những chỗ cần gia đình xác nhận (${issues.length})</h3>
