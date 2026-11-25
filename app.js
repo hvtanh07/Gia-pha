@@ -13,6 +13,7 @@
   const panel = document.getElementById("panel");
   const panelBody = document.getElementById("panelBody");
   let root, byId = new Map(), selectedId = null, hitIds = new Set(), DATA;
+  let mode = "2d", T3 = null, loading3d = null;
 
   const zoom = d3.zoom().scaleExtent([0.15, 2.5]).on("zoom", e => gRoot.attr("transform", e.transform));
   svg.call(zoom).on("dblclick.zoom", null);
@@ -35,8 +36,44 @@
     fit(false);
     bindUI();
     const hash = decodeURIComponent(location.hash.slice(1));
-    if (hash && byId.has(hash)) focusPerson(hash, true);
+    let want = new URLSearchParams(location.search).get("che-do");
+    if (!want) { try { want = localStorage.getItem("giapha-mode"); } catch (e) {} }
+    const go = () => { if (hash && byId.has(hash)) focusPerson(hash, true); };
+    if (want === "3d") setMode("3d").then(go); else go();
   }
+
+  // ---------- 2D / 3D ----------
+  function loadScript(src) {
+    return new Promise((ok, fail) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = () => fail(new Error(src)); document.head.appendChild(s); });
+  }
+  function load3d() {
+    loading3d = loading3d || ["vendor/three.min.js", "vendor/three-spritetext.min.js", "vendor/3d-force-graph.min.js", "view3d.js"]
+      .reduce((p, src) => p.then(() => loadScript(src)), Promise.resolve());
+    return loading3d;
+  }
+  async function setMode(m) {
+    const btn = document.getElementById("mode"), host = document.getElementById("tree3d");
+    if (m === "3d") {
+      btn.disabled = true; btn.textContent = "Đang tải…";
+      try { await load3d(); } catch (e) { btn.disabled = false; btn.textContent = "3D"; alertBox("Không tải được chế độ 3D."); return; }
+      host.hidden = false; svg.style("display", "none");
+      if (!T3) {
+        T3 = window.Tree3D.init(host, DATA.people, id => id ? select(id, false) : closePanel());
+        T3.setHits(hitIds); if (selectedId) T3.setSelected(selectedId);
+      } else { T3.pause(false); T3.resize(); }
+      if (selectedId) setTimeout(() => T3.focus(selectedId), 120);
+      btn.disabled = false;
+    } else {
+      host.hidden = true; svg.style("display", null); T3 && T3.pause(true);
+      if (selectedId) { const d = byId.get(selectedId); revealPath(d); update(d.parent || d); setTimeout(() => centerOn(d), DUR + 20); }
+    }
+    mode = m;
+    document.body.classList.toggle("is3d", m === "3d");
+    btn.textContent = m === "3d" ? "2D" : "3D";
+    btn.title = m === "3d" ? "Chuyển sang sơ đồ 2D" : "Chuyển sang chế độ 3D";
+    try { localStorage.setItem("giapha-mode", m); } catch (e) {}
+  }
+  function alertBox(msg) { const p = document.createElement("div"); p.className = "toast"; p.textContent = msg; document.body.appendChild(p); setTimeout(() => p.remove(), 3000); }
 
   function collapseTo(depth) {
     root.each(d => { d.children = d.depth < depth ? d._kids : null; });
@@ -143,6 +180,7 @@
 
   function focusPerson(id, center = true) {
     const d = byId.get(id); if (!d) return;
+    if (mode === "3d") { select(id, false); if (center) T3.focus(id); return; }
     revealPath(d);
     update(d.parent || d);
     select(id, false);
@@ -153,6 +191,7 @@
     selectedId = id;
     const d = byId.get(id);
     gNodes.selectAll("g.node").classed("selected", n => n.id === id);
+    T3 && T3.setSelected(id);
     renderPanel(d);
     panel.hidden = false;
     history.replaceState(null, "", "#" + encodeURIComponent(id));
@@ -221,6 +260,7 @@
       items = search(q.value);
       hitIds = new Set(q.value.trim() ? items.map(i => i.id) : []);
       gNodes.selectAll("g.node").classed("hit", n => hitIds.has(n.id));
+      T3 && T3.setHits(hitIds);
       if (!q.value.trim()) { res.hidden = true; return; }
       res.innerHTML = items.length ? items.map((it, i) => `<li role="option" data-i="${i}" aria-selected="${i === cur}">
           <div class="r-name">${esc(it.label)}</div><div class="r-sub">${esc(it.sub)}</div></li>`).join("")
@@ -239,9 +279,11 @@
     res.addEventListener("pointerdown", e => { const li = e.target.closest("li[data-i]"); if (li) { e.preventDefault(); choose(+li.dataset.i); } });
     document.addEventListener("pointerdown", e => { if (!e.target.closest(".search")) res.hidden = true; });
 
-    document.getElementById("zoomIn").onclick = () => svg.transition().duration(250).call(zoom.scaleBy, 1.3);
-    document.getElementById("zoomOut").onclick = () => svg.transition().duration(250).call(zoom.scaleBy, 1 / 1.3);
-    document.getElementById("fit").onclick = () => fit();
+    document.getElementById("zoomIn").onclick = () => mode === "3d" ? T3.zoomBy(1.3) : svg.transition().duration(250).call(zoom.scaleBy, 1.3);
+    document.getElementById("zoomOut").onclick = () => mode === "3d" ? T3.zoomBy(1 / 1.3) : svg.transition().duration(250).call(zoom.scaleBy, 1 / 1.3);
+    document.getElementById("fit").onclick = () => mode === "3d" ? T3.fit() : fit();
+    document.getElementById("mode").onclick = () => setMode(mode === "3d" ? "2d" : "3d");
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => T3 && T3.retheme());
     document.getElementById("expandAll").onclick = () => { expandAll(); update(root); setTimeout(fit, DUR); };
     document.getElementById("collapseAll").onclick = () => { collapseTo(3); update(root); setTimeout(fit, DUR); };
     document.getElementById("closePanel").onclick = closePanel;
@@ -254,7 +296,7 @@
       const a = e.target.closest("[data-act]"); if (!a) return;
       const d = byId.get(selectedId);
       if (a.dataset.act === "toggle") toggle(d);
-      else if (a.dataset.act === "center") centerOn(d);
+      else if (a.dataset.act === "center") mode === "3d" ? T3.focus(d.id) : centerOn(d);
       else if (a.dataset.act === "share") {
         navigator.clipboard?.writeText(location.href).then(() => { a.textContent = "Đã sao chép"; setTimeout(() => a.textContent = "Sao chép liên kết", 1500); });
       }
@@ -275,6 +317,7 @@
   function closePanel() {
     panel.hidden = true; selectedId = null;
     gNodes.selectAll("g.node").classed("selected", false);
+    T3 && T3.setSelected(null);
     history.replaceState(null, "", location.pathname + location.search);
   }
 

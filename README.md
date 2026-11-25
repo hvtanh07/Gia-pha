@@ -6,6 +6,9 @@ Cây gia phả tương tác của họ Hứa (Văn Hàn, Thái Thụy, Thái Bì
 - Nhấn vào một người để xem chi tiết; nút tròn bên phải ô để mở / thu gọn nhánh.
 - Ô tìm kiếm không cần gõ dấu (tìm theo tên, vợ/chồng, năm sinh, quê quán).
 - Mỗi người có liên kết riêng (`#id`) để chia sẻ.
+- Nút **3D / 2D** chuyển giữa sơ đồ phẳng và cây 3D hình nón (mỗi đời là một vòng tròn). Ở chế độ 3D: kéo để xoay, chụm hoặc cuộn để phóng to. Thêm `?che-do=3d` vào đường link để mở thẳng chế độ 3D.
+
+Thư viện 3D (three.js 0.149, three-spritetext 1.10, 3d-force-graph 1.79) nằm trong `vendor/` và chỉ tải khi bấm nút 3D.
 
 ## Dữ liệu
 
