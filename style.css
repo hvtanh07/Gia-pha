@@ -117,7 +117,7 @@ body.is3d .hint3d { display: block; position: absolute; top: 10px; right: 12px; 
   min-width: 44px; height: 44px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--line);
   background: var(--surface); box-shadow: var(--shadow); font-size: 14px;
 }
-.controls button#zoomIn, .controls button#zoomOut, .controls button#fit { font-size: 20px; }
+.controls button#zoomIn, .controls button#zoomOut, .controls button#fit { display: inline-flex; align-items: center; justify-content: center; padding: 0; width: 44px; }
 .legend { pointer-events: none;
   position: absolute; left: 12px; bottom: 12px; display: flex; gap: 12px; font-size: 12px;
   color: var(--muted); background: var(--surface); padding: 6px 10px; border-radius: 10px;
@@ -174,10 +174,14 @@ dialog::backdrop { background: rgba(0,0,0,.35); }
   .brand h1 { font-size: 18px; }
   .search { flex: none; }
   .legend { top: 10px; bottom: auto; left: 10px; padding-bottom: 6px; }
-  .controls { flex-direction: row; flex-wrap: wrap; justify-content: center; left: 8px; right: 8px; bottom: 10px; gap: 5px; }
-  .controls button { height: 40px; min-width: 40px; padding: 0 8px; font-size: 13px; }
-  #zoomIn, #zoomOut { display: none; }
-  body.is3d .hint3d { top: auto; bottom: 60px; left: 12px; right: 12px; text-align: center; }
+  .controls { flex-direction: row; flex-wrap: wrap; justify-content: center; left: 8px; right: 8px; bottom: 10px; gap: 8px; }
+  .controls button { height: 40px; min-width: 40px; padding: 0 10px; font-size: 13px; flex: 0 0 auto; white-space: nowrap; }
+  /* zoom buttons: their own column on the right, above the bottom toolbar */
+  .controls button#zoomIn, .controls button#zoomOut, .controls button#fit { position: absolute; right: 4px; width: 44px; height: 44px; }
+  .controls button#zoomIn { bottom: calc(56px + 104px); }
+  .controls button#zoomOut { bottom: calc(56px + 52px); }
+  .controls button#fit { bottom: 56px; }
+  body.is3d .hint3d { top: auto; bottom: 60px; left: 12px; right: 64px; text-align: center; }
   .legend { font-size: 11px; gap: 8px; }
   .panel {
     top: auto; left: 0; right: 0; bottom: 0; width: 100%; max-width: none; max-height: 52vh;

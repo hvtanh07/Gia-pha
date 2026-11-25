@@ -234,7 +234,7 @@
     const minK = VERT ? 0.72 : 0.6;
     if (k < minK) {
       k = minK; // keep text readable; the rest is reachable by dragging
-      if (VERT) { tx = w / 2 - k * root.px; ty = h - 76 - k * (root.py + D.H / 2); } // root at the bottom
+      if (VERT) { tx = w / 2 - k * root.px; ty = h - 110 - k * (root.py + D.H / 2); } // root at the bottom
       else { tx = 16 - k * x1; }
     }
     (animate ? svg.transition().duration(500) : svg).call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(k));
