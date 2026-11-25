@@ -6,7 +6,7 @@ window.Tree3D = (() => {
   let host, cv, ctx, nodes = [], links = [], byId = new Map();
   let hits = new Set(), selected = null, onPick = null, colors = {};
   let W = 0, Hh = 0, dpr = 1, f = 1;
-  const cam = { yaw: 0.5, pitch: 0.28, dist: 900, tx: 0, ty: 0, tz: 0, cyFrac: 0.5 };
+  const cam = { yaw: 0.5, pitch: 0.28, dist: 900, tx: 0, ty: 0, tz: 0, cyFrac: 0.5, cxOff: 0 };
   let anim = null, dirty = true, running = false, autoSpin = true, extent = { cx: 0, cz: 0, r: 1, h: 1 };
 
   const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -40,7 +40,7 @@ window.Tree3D = (() => {
     const depth = cam.dist - z2;
     if (depth < 5) return null;
     const s = f / depth;
-    return { sx: W / 2 + x1 * s, sy: Hh * cam.cyFrac - y2 * s, s, depth };
+    return { sx: W / 2 + cam.cxOff + x1 * s, sy: Hh * cam.cyFrac - y2 * s, s, depth };
   }
 
   function roundRect(x, y, w, h, r) {
@@ -119,7 +119,7 @@ window.Tree3D = (() => {
   function fitParams() {
     const vf = FOV / 2, hf = Math.atan(Math.tan(vf) * (W / Math.max(Hh, 1)));
     const need = Math.max(extent.r / Math.tan(Math.min(vf, hf)), extent.h / Math.tan(vf)) * 1.05 + extent.r * 0.5;
-    return { tx: extent.cx, ty: 0, tz: extent.cz, dist: need, pitch: 0.28, cyFrac: 0.5 };
+    return { tx: extent.cx, ty: 0, tz: extent.cz, dist: need, pitch: 0.28, cyFrac: 0.5, cxOff: 0 };
   }
   function fit(ms = 700) { animateTo(fitParams(), ms); }
   const clampDist = d => Math.max(60, Math.min(d, fitParams().dist * 2.5));
@@ -128,10 +128,19 @@ window.Tree3D = (() => {
   function focus(id, ms = 900) {
     const n = byId.get(id); if (!n) return;
     autoSpin = false;
-    const mobile = window.matchMedia("(max-width: 720px)").matches;
-    const to = { tx: n.x, ty: n.y, tz: n.z, dist: 230, pitch: 0.3, cyFrac: mobile ? 0.3 : 0.5 };
+    const to = { tx: n.x, ty: n.y, tz: n.z, dist: 230, pitch: 0.3, ...offsets() };
     if (n.depth > 0) to.yaw = Math.atan2(n.x, n.z);
     animateTo(to, ms);
+  }
+
+  // The details panel covers the right side on desktop and the bottom on phones.
+  const offsets = () => window.matchMedia("(max-width: 720px)").matches ? { cyFrac: 0.3, cxOff: 0 } : { cyFrac: 0.5, cxOff: W > 900 ? -200 : 0 };
+
+  // Make the tapped person the new pivot: keep the viewing angle, slide the centre to them.
+  function recenter(id) {
+    const n = byId.get(id); if (!n) return;
+    autoSpin = false;
+    animateTo({ tx: n.x, ty: n.y, tz: n.z, dist: Math.min(cam.dist, 320), ...offsets() }, 650);
   }
 
   // ---------- input: drag to rotate, pinch / wheel to zoom, tap to pick ----------
@@ -175,7 +184,7 @@ window.Tree3D = (() => {
     const r = cv.getBoundingClientRect(), x = cx - r.left, y = cy - r.top;
     for (let i = boxes.length - 1; i >= 0; i--) {
       const b = boxes[i];
-      if (x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h) { onPick && onPick(b.id); return; }
+      if (x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h) { recenter(b.id); onPick && onPick(b.id); return; }
     }
     onPick && onPick(null);
   }
@@ -206,10 +215,10 @@ window.Tree3D = (() => {
   function setHits(s) { hits = s; dirty = true; }
   function setSelected(id) {
     selected = id; dirty = true;
-    if (!id && window.matchMedia("(max-width: 720px)").matches) animateTo({ cyFrac: 0.5 }, 300);
+    if (!id) animateTo({ cyFrac: 0.5, cxOff: 0 }, 300);
   }
   function retheme() { readColors(); dirty = true; }
 
-  const api = { init, fit, zoomBy, focus, setHits, setSelected, resize, retheme, pause };
+  const api = { init, fit, zoomBy, focus, setHits, setSelected, resize, retheme, pause, boxes: () => boxes, cam: () => ({ ...cam }) };
   return api;
 })();
