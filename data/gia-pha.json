@@ -1,0 +1,1480 @@
+{
+ "meta": {
+  "title": "Gia phả họ Hứa",
+  "origin": "Làng Kênh (nay là thôn Ký Con, Đông Xuân, Đông Hưng, Thái Bình); chi họ Hứa định cư tại Văn Hàn, Thái Hưng, Thái Thụy, Thái Bình.",
+  "sourceNotes": [
+   "Dữ liệu chép lại từ file \"Cơ sở dữ liệu xây dựng gia phả họ Hứa\" (docx). Một số lỗi chính tả rõ ràng (ví dụ \"Hứa Vă\" → \"Hứa Văn\", \"thangs\" → \"tháng\") đã được sửa.",
+   "Số điện thoại trong tài liệu gốc không được đưa lên trang web.",
+   "Cụ Hứa Văn Hiệp có ba vợ, cụ Hứa Văn Tiêm có hai vợ, ông Hứa Văn Thành có hai vợ; tài liệu không ghi rõ con nào của bà nào.",
+   "Cuối tài liệu có mục \"Hứa Văn Tường\" lặp lại và một dòng \"Hứa Thị Quản (許 氏 管)\" không rõ vị trí; mục lặp được bỏ qua.",
+   "Phần \"Tham khảo tự điển Hán Việt cổ đại\" ở cuối tài liệu được đưa vào mục Chú giải chữ Hán."
+  ]
+ },
+ "people": [
+  {
+   "id": "tt",
+   "name": "Vũ Công Tự Trung Thuận",
+   "sex": "m",
+   "gen": 0,
+   "code": "Thủy tổ",
+   "spouses": [
+    {
+     "name": "Đặng Thị Từ Huệ"
+    }
+   ],
+   "place": "Cư trú tại làng Kênh, nay gọi là thôn Ký Con, Đông Xuân, Đông Hưng, Thái Bình"
+  },
+  {
+   "id": "d1-1",
+   "parent": "tt",
+   "name": "Vũ Trung Trực",
+   "sex": "m",
+   "gen": 1,
+   "code": "ĐI.1",
+   "spouses": [
+    {
+     "name": "Vũ Thị Hiền"
+    }
+   ],
+   "place": "Trú tại làng Kênh, nay là thôn Ký Con, Đông Xuân, Thái Bình"
+  },
+  {
+   "id": "d1-2",
+   "parent": "tt",
+   "name": "Vũ Trung Thuộc",
+   "sex": "m",
+   "gen": 1,
+   "code": "ĐI.2",
+   "gio": "14 tháng 3",
+   "spouses": [
+    {
+     "name": "Chưa có thông tin"
+    }
+   ],
+   "place": "Sinh quán: làng Kênh, nay là thôn Ký Con, Đông Xuân, Đông Hưng, Thái Bình. Trú tại: Văn Hàn, Thái Hưng, Thái Thụy, Thái Bình"
+  },
+  {
+   "id": "d1-2-g1",
+   "parent": "d1-2",
+   "name": "Vũ Thị Lý",
+   "sex": "f",
+   "gen": 2,
+   "note": "Con gái thứ nhất",
+   "married": "Lấy chồng họ Trần, \"sinh ra chi chòa nhà ông Lái Giao\" (họ Trần Hải Dương)"
+  },
+  {
+   "id": "d1-2-g2",
+   "parent": "d1-2",
+   "name": "Con gái thứ hai (chưa rõ tên)",
+   "sex": "f",
+   "gen": 2,
+   "married": "Lấy chồng họ Vũ \"cụ bạ Tháp\" (họ Vũ xóm 4 Văn Hàn). Sinh ra mẹ ông Thủ Chính"
+  },
+  {
+   "id": "d1-2-g3",
+   "parent": "d1-2",
+   "name": "Con gái thứ ba (chưa rõ tên)",
+   "sex": "f",
+   "gen": 2,
+   "married": "Lấy chồng họ Vũ xóm 4 Văn Hàn. Sinh ra bố ông Anh, bố ông Phó Biểng v.v..."
+  },
+  {
+   "id": "d1-2-g4",
+   "parent": "d1-2",
+   "name": "Vũ Thị Quản",
+   "sex": "f",
+   "gen": 2,
+   "note": "Con gái thứ tư. Cuối tài liệu có ghi tên chữ Hán \"Hứa Thị Quản (許 氏 管)\", có thể là cùng một người.",
+   "married": "Lấy chồng họ Trương Kim xóm 2 Văn Hàn. Sinh ra bố ông Tịnh, cụ bạ Thinh, bà Vệ Đương v.v..."
+  },
+  {
+   "id": "d2",
+   "parent": "d1-2",
+   "name": "Hứa Văn Tiêm",
+   "sex": "m",
+   "gen": 2,
+   "code": "ĐI.2.ĐII",
+   "gio": "mồng 8 tháng 5",
+   "spouses": [
+    {
+     "name": "Nguyễn Thị Vọng",
+     "gio": "16 tháng 6"
+    },
+    {
+     "name": "Nguyễn Thị Nuôi",
+     "gio": "7 tháng 1"
+    }
+   ],
+   "note": "Từ đời này dòng họ mang họ Hứa (tài liệu không ghi lý do đổi họ từ Vũ sang Hứa)."
+  },
+  {
+   "id": "d3-1",
+   "parent": "d2",
+   "name": "Hứa Văn Hiệp",
+   "sex": "m",
+   "gen": 3,
+   "code": "ĐI.2.ĐII.ĐIII.1",
+   "life": "1862–1935",
+   "gio": "22 tháng chạp",
+   "spouses": [
+    {
+     "name": "Giang Thị Huấn",
+     "life": "1862–1940",
+     "gio": "15 tháng 5",
+     "origin": "Họ Giang xóm 7 Văn Hàn"
+    },
+    {
+     "name": "Nguyễn Thị Thuận",
+     "gio": "20 tháng 1",
+     "origin": "Họ Nguyễn xóm 5 Văn Hàn"
+    },
+    {
+     "name": "Trương Thị Nhận",
+     "life": "1894–1976",
+     "gio": "28 tháng 2",
+     "origin": "Họ Trương xóm 5 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d3-2",
+   "parent": "d2",
+   "name": "Hứa Văn Tỉ",
+   "sex": "m",
+   "gen": 3,
+   "code": "ĐI.2.ĐII.ĐIII.2",
+   "gio": "30 tháng 10",
+   "spouses": [
+    {
+     "name": "Tạ Thị Tô",
+     "gio": "28 tháng chạp"
+    }
+   ],
+   "note": "Danh sách con cụ Tiêm ghi là \"Hứa Văn Tỷ\"."
+  },
+  {
+   "id": "d3-3",
+   "parent": "d2",
+   "name": "Hứa Văn Vân",
+   "sex": "m",
+   "gen": 3,
+   "code": "ĐI.2.ĐII.ĐIII.3",
+   "life": "Tạ thế 1922",
+   "gio": "13 tháng giêng",
+   "spouses": [
+    {
+     "name": "Nguyễn Thị Tha",
+     "life": "Tạ thế 1933",
+     "gio": "21 tháng 11"
+    }
+   ]
+  },
+  {
+   "id": "d3-4",
+   "parent": "d2",
+   "name": "Hứa Văn Bơi",
+   "sex": "m",
+   "gen": 3,
+   "code": "ĐI.2.ĐII.ĐIII.4",
+   "gio": "19 tháng giêng",
+   "spouses": [
+    {
+     "name": "Trương Thị Tuyết",
+     "gio": "5 tháng 11",
+     "origin": "Họ Trương xóm 6 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d3-5",
+   "parent": "d2",
+   "name": "Hứa Văn Hoan",
+   "sex": "m",
+   "gen": 3,
+   "code": "ĐI.2.ĐII.ĐIII.5",
+   "gio": "3 tháng 5",
+   "spouses": [
+    {
+     "name": "Nguyễn Thị Điềm",
+     "gio": "6 tháng 12",
+     "origin": "Họ Nguyễn xóm 5 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d3-6",
+   "parent": "d2",
+   "name": "Hứa Văn Liệu",
+   "sex": "m",
+   "gen": 3,
+   "code": "ĐI.2.ĐII.ĐIII.6",
+   "gio": "03 tháng chạp",
+   "spouses": [
+    {
+     "name": "Vũ Thị Khuê",
+     "gio": "30 tháng 9",
+     "origin": "Họ Vũ xóm 4 Văn Hàn, thuộc chi chòa nhà ông Cường"
+    }
+   ]
+  },
+  {
+   "id": "d3-7",
+   "parent": "d2",
+   "name": "Hứa Thị Thấm",
+   "sex": "f",
+   "gen": 3,
+   "married": "Lấy chồng họ Lê, sinh ra ông Hoàn"
+  },
+  {
+   "id": "d3-8",
+   "parent": "d2",
+   "name": "Hứa Văn Hựu",
+   "sex": "m",
+   "gen": 3,
+   "note": "Tài liệu chưa có thông tin chi tiết."
+  },
+  {
+   "id": "d4-niep",
+   "parent": "d3-1",
+   "name": "Hứa Văn Niếp",
+   "sex": "m",
+   "gen": 4,
+   "code": "ĐI.2.ĐII.ĐIII.1.ĐIV.1'",
+   "life": "1911–1991",
+   "gio": "25 tháng 5",
+   "spouses": [
+    {
+     "name": "Trương Thị Nhớn (tự Nhất)",
+     "life": "1920–1990",
+     "gio": "20 tháng 10",
+     "origin": "Họ Trương Kim xóm 5 Văn Hàn"
+    }
+   ],
+   "adopted": true,
+   "note": "Con nuôi."
+  },
+  {
+   "id": "d5-lien",
+   "parent": "d4-niep",
+   "name": "Hứa Thị Liên",
+   "sex": "f",
+   "gen": 5,
+   "life": "1958–1999",
+   "gio": "27 tháng 5"
+  },
+  {
+   "id": "d4-chi",
+   "parent": "d3-1",
+   "name": "Hứa Văn Chí",
+   "sex": "m",
+   "gen": 4,
+   "code": "ĐI.2.ĐII.ĐIII.1.ĐIV.1",
+   "life": "1923–1952",
+   "gio": "mồng 5 tháng 3",
+   "spouses": [
+    {
+     "name": "Vũ Thị Nuôi",
+     "gio": "21 tháng 7",
+     "origin": "Họ Vũ Khắc xóm 3 Văn Hàn"
+    },
+    {
+     "name": "Trương Thị Mi",
+     "life": "1916–2000",
+     "gio": "21 tháng 11",
+     "origin": "Họ Trương Đức xóm 2 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d4-niem",
+   "parent": "d3-1",
+   "name": "Hứa Thị Niệm",
+   "sex": "f",
+   "gen": 4,
+   "married": "Lấy chồng họ Trương \"Trương Đức Sáng\" (họ Trương xóm 4 Văn Hàn)"
+  },
+  {
+   "id": "d4-trung",
+   "parent": "d3-1",
+   "name": "Hứa Thị Trung",
+   "sex": "f",
+   "gen": 4,
+   "married": "Lấy chồng họ Nguyễn \"Nguyễn Vĩnh Khôi\" (họ Nguyễn xóm 6 Văn Hàn)"
+  },
+  {
+   "id": "d4-uc",
+   "parent": "d3-1",
+   "name": "Hứa Thị Ức",
+   "sex": "f",
+   "gen": 4,
+   "married": "Lấy chồng họ Trương \"Trương Đức Lam\" (họ Trương xóm 2 Văn Hàn)"
+  },
+  {
+   "id": "d5-thinh",
+   "parent": "d4-chi",
+   "name": "Hứa Văn Thịnh",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.1.ĐIV.1.ĐV.1",
+   "life": "Sinh năm 1944",
+   "spouses": [
+    {
+     "name": "Phạm Thị Ngãi",
+     "life": "Sinh năm 1951",
+     "origin": "Họ Phạm: Đông La, Đông Hưng, Thái Bình"
+    }
+   ]
+  },
+  {
+   "id": "d6-truong",
+   "parent": "d5-thinh",
+   "name": "Hứa Xuân Trường",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.1.ĐIV.1.ĐV.1.ĐVI.1",
+   "life": "1975–2011",
+   "gio": "19 tháng 8"
+  },
+  {
+   "id": "d6-thang",
+   "parent": "d5-thinh",
+   "name": "Hứa Việt Thắng",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.1.ĐIV.1.ĐV.1.ĐVI.2",
+   "life": "Sinh năm 1979",
+   "spouses": [
+    {
+     "name": "Nguyễn Thị Thanh Mai",
+     "life": "Sinh năm 1980",
+     "origin": "Họ Nguyễn Hà Đông"
+    }
+   ]
+  },
+  {
+   "id": "d7-tduc",
+   "parent": "d6-thang",
+   "name": "Hứa Dũng Trí Đức",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 2004"
+  },
+  {
+   "id": "d7-khoa",
+   "parent": "d6-thang",
+   "name": "Hứa Việt Khoa",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 2006"
+  },
+  {
+   "id": "d7-vuong",
+   "parent": "d6-thang",
+   "name": "Hứa Đức Vượng",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 2011"
+  },
+  {
+   "id": "d5-minh",
+   "parent": "d4-chi",
+   "name": "Hứa Văn Mịnh",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.1.ĐIV.1.ĐV.2",
+   "life": "Sinh năm 1952",
+   "spouses": [
+    {
+     "name": "Vũ Thị Mừng",
+     "origin": "Họ Vũ xóm 6 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d6-hue",
+   "parent": "d5-minh",
+   "name": "Hứa Thị Huế",
+   "sex": "f",
+   "gen": 6
+  },
+  {
+   "id": "d6-hat",
+   "parent": "d5-minh",
+   "name": "Hứa Thị Hạt",
+   "sex": "f",
+   "gen": 6
+  },
+  {
+   "id": "d4-than",
+   "parent": "d3-2",
+   "name": "Hứa Văn Thản",
+   "sex": "m",
+   "gen": 4,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.1",
+   "gio": "mồng 6 tháng 3",
+   "spouses": [
+    {
+     "name": "Lê Thị Chẩn",
+     "gio": "mồng 7 tháng 10",
+     "origin": "Họ Lê xóm 4 Văn Hàn"
+    },
+    {
+     "name": "Trương Thị Thân",
+     "gio": "22 tháng 10",
+     "origin": "Họ Trương xóm 6 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d4-tue",
+   "parent": "d3-2",
+   "name": "Hứa Văn Tuệ",
+   "sex": "m",
+   "gen": 4,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2",
+   "life": "Tạ thế 1953",
+   "gio": "19 tháng 12",
+   "spouses": [
+    {
+     "name": "Lê Thị Cúc",
+     "life": "Tạ thế 1990",
+     "gio": "9 tháng 2",
+     "origin": "Họ Lê xóm 4 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d5-xa",
+   "parent": "d4-than",
+   "name": "Hứa Thị Xa",
+   "sex": "f",
+   "gen": 5,
+   "married": "Lấy chồng họ ... (chưa có thông tin)"
+  },
+  {
+   "id": "d5-thanh",
+   "parent": "d4-than",
+   "name": "Hứa Văn Thành",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.1.ĐV.1",
+   "life": "Sinh năm 1936",
+   "spouses": [
+    {
+     "name": "Trương Thị Tí",
+     "gio": "mồng 7 tháng 10",
+     "origin": "Họ Trương Đức xóm 5 Văn Hàn"
+    },
+    {
+     "name": "Vũ Thị Việt",
+     "life": "Sinh năm 1956",
+     "origin": "Họ Vũ xã Thái Tân"
+    }
+   ]
+  },
+  {
+   "id": "d5-dang",
+   "parent": "d4-than",
+   "name": "Hứa Văn Đăng",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.1.ĐV.2",
+   "life": "Sinh năm 1940",
+   "spouses": [
+    {
+     "name": "Đoàn Thị Quất",
+     "life": "Sinh năm 1947",
+     "origin": "Họ Đoàn, xã Thái Nguyên, Thái Thụy, Thái Bình"
+    }
+   ]
+  },
+  {
+   "id": "d5-dan",
+   "parent": "d4-than",
+   "name": "Hứa Văn Đán",
+   "sex": "m",
+   "gen": 5,
+   "note": "Tài liệu chưa có thông tin chi tiết."
+  },
+  {
+   "id": "d6-trung",
+   "parent": "d5-thanh",
+   "name": "Hứa Văn Trung",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.1.ĐV.1.ĐVI.1",
+   "life": "1954–1988",
+   "gio": "3 tháng 10"
+  },
+  {
+   "id": "d6-thuy",
+   "parent": "d5-thanh",
+   "name": "Hứa Thị Thủy",
+   "sex": "f",
+   "gen": 6,
+   "life": "Sinh năm 1955",
+   "married": "Lấy chồng họ Nguyễn \"Nguyễn Văn Bao\" (họ Nguyễn: Phù Lưu Tế, Mỹ Đức, Hà Nội)"
+  },
+  {
+   "id": "d6-lan",
+   "parent": "d5-thanh",
+   "name": "Hứa Thị Lan",
+   "sex": "f",
+   "gen": 6
+  },
+  {
+   "id": "d6-minh",
+   "parent": "d5-thanh",
+   "name": "Hứa Văn Minh",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.1.ĐV.1.ĐVI.2",
+   "life": "Sinh năm 1964"
+  },
+  {
+   "id": "d6-tan",
+   "parent": "d5-thanh",
+   "name": "Hứa Văn Tân",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.1.ĐV.1.ĐVI.3",
+   "life": "Sinh năm 1966",
+   "spouses": [
+    {
+     "name": "Nguyễn Thị Thanh Thủy",
+     "life": "Sinh năm 1974",
+     "origin": "Họ Nguyễn, Phú Xuyên, Hà Tây"
+    }
+   ]
+  },
+  {
+   "id": "d7-thang",
+   "parent": "d6-tan",
+   "name": "Hứa Văn Thắng",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 1995"
+  },
+  {
+   "id": "d7-haha",
+   "parent": "d6-tan",
+   "name": "Hứa Nguyễn Hải Hà",
+   "sex": "f",
+   "gen": 7,
+   "life": "Sinh năm 2007"
+  },
+  {
+   "id": "d6-quang",
+   "parent": "d5-thanh",
+   "name": "Hứa Văn Quang",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.1.ĐV.1.ĐVI.4",
+   "life": "Sinh năm 1971",
+   "spouses": [
+    {
+     "name": "Giang Thị Thúy Nga",
+     "life": "Sinh năm 1982",
+     "origin": "Họ Giang, thành phố Sơn La"
+    }
+   ]
+  },
+  {
+   "id": "d7-glinh",
+   "parent": "d6-quang",
+   "name": "Hứa Giang Linh",
+   "sex": "f",
+   "gen": 7,
+   "life": "Sinh năm 2006"
+  },
+  {
+   "id": "d7-bao",
+   "parent": "d6-quang",
+   "name": "Hứa Gia Bảo",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 2012"
+  },
+  {
+   "id": "d6-hung",
+   "parent": "d5-dang",
+   "name": "Hứa Mạnh Hùng",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.1.ĐV.2.ĐVI.1",
+   "life": "Sinh năm 1973",
+   "spouses": [
+    {
+     "name": "Lê Thị Bích Nhuần",
+     "life": "Sinh năm 1976",
+     "origin": "Họ Lê: Vũ Thành, Thái Hưng, Thái Thụy"
+    }
+   ]
+  },
+  {
+   "id": "d7-vanh",
+   "parent": "d6-hung",
+   "name": "Hứa Việt Anh",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 2000"
+  },
+  {
+   "id": "d7-blinh",
+   "parent": "d6-hung",
+   "name": "Hứa Bảo Linh",
+   "sex": "f",
+   "gen": 7,
+   "life": "Sinh năm 2007"
+  },
+  {
+   "id": "d6-huong",
+   "parent": "d5-dang",
+   "name": "Hứa Thị Hường",
+   "sex": "f",
+   "gen": 6,
+   "life": "Sinh năm 1975",
+   "married": "Lấy chồng họ Nguyễn \"Nguyễn Ngọc Tùng\" (họ Nguyễn: thành phố Thái Bình)"
+  },
+  {
+   "id": "d6-ha",
+   "parent": "d5-dang",
+   "name": "Hứa Thị Hà",
+   "sex": "f",
+   "gen": 6,
+   "life": "Sinh năm 1982",
+   "married": "Lấy chồng họ Lê \"Lê Đức Cảnh\" (họ Lê: Lê Lợi, Kiến Xương, Thái Bình)"
+  },
+  {
+   "id": "d5-quan",
+   "parent": "d4-tue",
+   "name": "Hứa Văn Quán",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.1",
+   "life": "1933–1952",
+   "gio": "16 tháng 8",
+   "spouses": [
+    {
+     "name": "Trương Thị Bàn",
+     "note": "Sau khi chồng mất đã xuất giá"
+    }
+   ]
+  },
+  {
+   "id": "d5-toai",
+   "parent": "d4-tue",
+   "name": "Hứa Văn Toại",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.2",
+   "life": "1934–…",
+   "gio": "20 tháng 8",
+   "spouses": [
+    {
+     "name": "Nguyễn Thị Rũy",
+     "life": "Sinh năm 1934",
+     "origin": "Họ Nguyễn xóm 9 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d5-thao",
+   "parent": "d4-tue",
+   "name": "Hứa Thị Thảo",
+   "sex": "f",
+   "gen": 5
+  },
+  {
+   "id": "d5-qui",
+   "parent": "d4-tue",
+   "name": "Hứa Văn Quí",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.3",
+   "life": "Sinh năm 1943",
+   "spouses": [
+    {
+     "name": "Phạm Thị Nụ",
+     "life": "Sinh năm 1949",
+     "origin": "Họ Phạm, xã Tây Tiến, Tiền Hải, Thái Bình"
+    }
+   ]
+  },
+  {
+   "id": "d5-thach",
+   "parent": "d4-tue",
+   "name": "Hứa Thị Thạch",
+   "sex": "f",
+   "gen": 5
+  },
+  {
+   "id": "d5-ty",
+   "parent": "d4-tue",
+   "name": "Hứa Văn Tỵ",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.4",
+   "life": "Sinh năm 1953",
+   "spouses": [
+    {
+     "name": "Hà Thị Thắng",
+     "life": "Sinh năm 1954",
+     "origin": "Họ Hà, Đông Hòa, thành phố Thái Bình"
+    }
+   ],
+   "issue": "Không có trong danh sách \"Các con\" của cụ Hứa Văn Tuệ, nhưng mã đời (ĐIV.2.ĐV.4) xếp ông là con thứ tư của cụ Tuệ. Cần gia đình xác nhận."
+  },
+  {
+   "id": "d6-vu",
+   "parent": "d5-toai",
+   "name": "Hứa Văn Vụ",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.2.ĐVI.1",
+   "life": "Sinh năm 1954",
+   "spouses": [
+    {
+     "name": "Trần Thị Tách",
+     "life": "Sinh năm 1956",
+     "origin": "Họ Trần, Thụy Hồng, Thái Thụy"
+    }
+   ]
+  },
+  {
+   "id": "d6-xuan",
+   "parent": "d5-toai",
+   "name": "Hứa Văn Xuân",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.2.ĐVI.2",
+   "life": "1960–2007",
+   "gio": "30 tháng 10",
+   "spouses": [
+    {
+     "name": "Đỗ Thị Tròn"
+    }
+   ]
+  },
+  {
+   "id": "d6-nghia",
+   "parent": "d5-toai",
+   "name": "Hứa Văn Nghĩa",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.2.ĐVI.3",
+   "life": "Sinh năm 1968",
+   "spouses": [
+    {
+     "name": "Đỗ Thị Hồng",
+     "life": "Sinh năm 1976",
+     "origin": "Họ Đỗ, Thái Học, Thái Thụy"
+    }
+   ]
+  },
+  {
+   "id": "d6-hien",
+   "parent": "d5-toai",
+   "name": "Hứa Thị Hiền",
+   "sex": "f",
+   "gen": 6
+  },
+  {
+   "id": "d6-que",
+   "parent": "d5-toai",
+   "name": "Hứa Thị Quế",
+   "sex": "f",
+   "gen": 6
+  },
+  {
+   "id": "d6-chi",
+   "parent": "d5-toai",
+   "name": "Hứa Thị Chi",
+   "sex": "f",
+   "gen": 6
+  },
+  {
+   "id": "d6-chit",
+   "parent": "d5-toai",
+   "name": "Hứa Thị Chít",
+   "sex": "f",
+   "gen": 6
+  },
+  {
+   "id": "d7-duc",
+   "parent": "d6-vu",
+   "name": "Hứa Văn Đức",
+   "sex": "m",
+   "gen": 7,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.2.ĐVI.1.ĐVII.1",
+   "life": "Sinh năm 1978",
+   "spouses": [
+    {
+     "name": "Trần Thị Thu Hương",
+     "life": "Sinh năm 1992",
+     "origin": "Họ Trần, Thanh Tân, Kiến Xương, Thái Bình"
+    }
+   ]
+  },
+  {
+   "id": "d8-phuoc",
+   "parent": "d7-duc",
+   "name": "Hứa Văn Phước",
+   "sex": "m",
+   "gen": 8,
+   "life": "Sinh năm 2011"
+  },
+  {
+   "id": "d8-phu",
+   "parent": "d7-duc",
+   "name": "Hứa Văn Phú",
+   "sex": "m",
+   "gen": 8,
+   "life": "Sinh năm 2013"
+  },
+  {
+   "id": "d7-mai",
+   "parent": "d6-vu",
+   "name": "Hứa Thị Mai",
+   "sex": "f",
+   "gen": 7,
+   "life": "Sinh năm 1980"
+  },
+  {
+   "id": "d7-tam",
+   "parent": "d6-vu",
+   "name": "Hứa Văn Tâm",
+   "sex": "m",
+   "gen": 7,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.2.ĐVI.1.ĐVII.2",
+   "life": "Sinh năm 1988",
+   "note": "Mục riêng của ông chưa điền thông tin vợ, con."
+  },
+  {
+   "id": "d7-dao",
+   "parent": "d6-xuan",
+   "name": "Hứa Thị Đào",
+   "sex": "f",
+   "gen": 7,
+   "life": "Sinh năm 1991"
+  },
+  {
+   "id": "d7-trang",
+   "parent": "d6-nghia",
+   "name": "Hứa Thị Trang",
+   "sex": "f",
+   "gen": 7,
+   "life": "Sinh năm 1996"
+  },
+  {
+   "id": "d7-huyen",
+   "parent": "d6-nghia",
+   "name": "Hứa Thị Huyền",
+   "sex": "f",
+   "gen": 7,
+   "life": "Sinh năm 2000"
+  },
+  {
+   "id": "d7-thu",
+   "parent": "d6-nghia",
+   "name": "Hứa Thị Thư",
+   "sex": "f",
+   "gen": 7,
+   "life": "Sinh năm 2013"
+  },
+  {
+   "id": "d6-huy",
+   "parent": "d5-qui",
+   "name": "Hứa Văn Huy",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.3.ĐVI.1",
+   "life": "Sinh năm 1973",
+   "spouses": [
+    {
+     "name": "Hà Thị Thu Hằng",
+     "origin": "Họ Hà, Hùng Quan, Đoan Hùng, Phú Thọ"
+    }
+   ]
+  },
+  {
+   "id": "d7-tanh",
+   "parent": "d6-huy",
+   "name": "Hứa Văn Tuấn Anh",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 1999"
+  },
+  {
+   "id": "d7-hieu",
+   "parent": "d6-huy",
+   "name": "Hứa Minh Hiếu",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 2004"
+  },
+  {
+   "id": "d6-hoa",
+   "parent": "d5-qui",
+   "name": "Hứa Thị Hoa",
+   "sex": "f",
+   "gen": 6,
+   "life": "Sinh năm 1974"
+  },
+  {
+   "id": "d6-huong2",
+   "parent": "d5-qui",
+   "name": "Hứa Thị Hường",
+   "sex": "f",
+   "gen": 6
+  },
+  {
+   "id": "d6-hoa2",
+   "parent": "d5-qui",
+   "name": "Hứa Văn Hóa",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.3.ĐVI.2",
+   "life": "Sinh năm 1980",
+   "spouses": [
+    {
+     "name": "Vũ Thị Liêm",
+     "life": "Sinh năm 1983",
+     "origin": "Họ Vũ, Nghĩa Hưng, Nam Định"
+    }
+   ]
+  },
+  {
+   "id": "d7-hai",
+   "parent": "d6-hoa2",
+   "name": "Hứa Văn Hải",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 2008"
+  },
+  {
+   "id": "d7-nam",
+   "parent": "d6-hoa2",
+   "name": "Hứa Phương Nam",
+   "sex": "m",
+   "gen": 7,
+   "life": "Sinh năm 2013"
+  },
+  {
+   "id": "d6-hoang",
+   "parent": "d5-qui",
+   "name": "Hứa Văn Hoàng",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.3.ĐVI.3",
+   "spouses": [
+    {
+     "name": "Chưa rõ tên",
+     "life": "Sinh năm 1983"
+    }
+   ],
+   "note": "Mục riêng của ông chưa điền đủ thông tin."
+  },
+  {
+   "id": "d6-tuanh",
+   "parent": "d5-ty",
+   "name": "Hứa Hà Tú Anh",
+   "sex": "f",
+   "gen": 6,
+   "life": "Sinh năm 1980",
+   "married": "Lấy chồng họ Trịnh \"Trịnh Văn Phong\" (họ Trịnh: Thuận Vi, Bách Thuận, Vũ Thư, Thái Bình)"
+  },
+  {
+   "id": "d6-vanh",
+   "parent": "d5-ty",
+   "name": "Hứa Thị Vân Anh",
+   "sex": "f",
+   "gen": 6,
+   "life": "Sinh năm 1988",
+   "married": "Lấy chồng họ Bùi \"Bùi Thành Trung\" (họ Bùi: Vũ Phúc, thành phố Thái Bình)"
+  },
+  {
+   "id": "d4-than2",
+   "parent": "d3-3",
+   "name": "Hứa Thị Thẩn",
+   "sex": "f",
+   "gen": 4,
+   "married": "Lấy chồng họ Tạ xóm 7 Văn Hàn (Tạ Văn Phú)"
+  },
+  {
+   "id": "d4-thuc",
+   "parent": "d3-3",
+   "name": "Hứa Thị Thực",
+   "sex": "f",
+   "gen": 4,
+   "married": "Lấy chồng họ Trương xóm 4 Văn Hàn (Trương Đức Tác)"
+  },
+  {
+   "id": "d4-thua",
+   "parent": "d3-3",
+   "name": "Hứa Thị Thưa",
+   "sex": "f",
+   "gen": 4,
+   "married": "Lấy chồng họ Trương xóm 4 Văn Hàn (Trương Sĩ Đạm)"
+  },
+  {
+   "id": "d4-vi",
+   "parent": "d3-3",
+   "name": "Hứa Văn Vi",
+   "sex": "m",
+   "gen": 4,
+   "code": "ĐI.2.ĐII.ĐIII.3.ĐIV.1",
+   "life": "Tạ thế 1945",
+   "gio": "18 tháng 3",
+   "spouses": [
+    {
+     "name": "Giang Thị Đậu",
+     "origin": "Họ Giang xóm 7 Văn Hàn",
+     "note": "Sau khi chồng mất đã xuất giá"
+    }
+   ],
+   "issue": "Danh sách \"Các con\" của cụ Hứa Văn Vân chỉ có 3 con gái, nhưng mã đời (ĐIII.3.ĐIV.1) xếp ông là con của cụ Vân. Cần gia đình xác nhận."
+  },
+  {
+   "id": "d5-minh2",
+   "parent": "d4-vi",
+   "name": "Hứa Văn Minh",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.3.ĐIV.1.ĐV.1",
+   "life": "1944–…",
+   "gio": "(chưa rõ)",
+   "note": "Liệt sĩ. Tài liệu ghi \"Các con xinh thành\"."
+  },
+  {
+   "id": "d4-tam",
+   "parent": "d3-4",
+   "name": "Hứa Thị Tâm",
+   "sex": "f",
+   "gen": 4,
+   "married": "Lấy chồng họ Lê \"Lê Quang Toe\" (họ Lê xóm 4 Văn Hàn)"
+  },
+  {
+   "id": "d4-tuong",
+   "parent": "d3-4",
+   "name": "Hứa Văn Tường",
+   "sex": "m",
+   "gen": 4,
+   "code": "ĐI.2.ĐII.ĐIII.4.ĐIV.1",
+   "gio": "26 tháng 6",
+   "spouses": [
+    {
+     "name": "Nguyễn Thị Tý",
+     "gio": "9 tháng 2",
+     "origin": "Họ Nguyễn xóm 3 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d4-voi",
+   "parent": "d3-4",
+   "name": "Hứa Văn Vòi",
+   "sex": "m",
+   "gen": 4,
+   "code": "ĐI.2.ĐII.ĐIII.4.ĐIV.2",
+   "gio": "14 tháng 4",
+   "spouses": [
+    {
+     "name": "Trương Thị Đương",
+     "note": "Sau khi chồng mất đã xuất giá"
+    }
+   ]
+  },
+  {
+   "id": "d5-dinh",
+   "parent": "d4-tuong",
+   "name": "Hứa Văn Định",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.4.ĐIV.1.ĐV.1",
+   "life": "1933–1995",
+   "gio": "8 tháng 11",
+   "spouses": [
+    {
+     "name": "Lê Thị Hòa",
+     "life": "Sinh năm 1938",
+     "origin": "Họ Lê (chưa rõ)"
+    }
+   ]
+  },
+  {
+   "id": "d5-my",
+   "parent": "d4-tuong",
+   "name": "Hứa Văn Mỹ",
+   "sex": "m",
+   "gen": 5,
+   "code": "ĐI.2.ĐII.ĐIII.4.ĐV.2",
+   "life": "1937–1984",
+   "gio": "5 tháng 2",
+   "spouses": [
+    {
+     "name": "Trương Thị Hòa",
+     "life": "Sinh năm 1937",
+     "origin": "Họ Trương xóm 5 Văn Hàn"
+    }
+   ],
+   "issue": "Mã đời trong tài liệu thiếu đoạn ĐIV.1 (ghi ĐIII.4.ĐV.2); xếp là con cụ Tường theo danh sách \"Các con\"."
+  },
+  {
+   "id": "d5-ngan",
+   "parent": "d4-tuong",
+   "name": "Hứa Thị Ngân",
+   "sex": "f",
+   "gen": 5,
+   "life": "Tuổi Sửu",
+   "note": "Tài liệu ghi \"sinh năm: 1 tuổi sửu\"."
+  },
+  {
+   "id": "d5-hanh",
+   "parent": "d4-tuong",
+   "name": "Hứa Thị Hạnh",
+   "sex": "f",
+   "gen": 5,
+   "life": "Sinh năm 1947",
+   "married": "Lấy chồng họ Nguyễn \"Nguyễn Văn Tỵ\" (Hòa Tiến, Hưng Hà, Thái Bình)"
+  },
+  {
+   "id": "d5-dung",
+   "parent": "d4-tuong",
+   "name": "Hứa Thị Dung",
+   "sex": "f",
+   "gen": 5,
+   "life": "Sinh năm 1953",
+   "married": "Lấy chồng họ Nguyễn \"Nguyễn Hữu Miền\" (họ Nguyễn, Thụy Trường, Thụy Anh)"
+  },
+  {
+   "id": "d6-tamanh",
+   "parent": "d5-dinh",
+   "name": "Hứa Thị Tâm Anh",
+   "sex": "f",
+   "gen": 6,
+   "married": "Lấy chồng họ ... (chưa có thông tin)"
+  },
+  {
+   "id": "d6-lananh",
+   "parent": "d5-dinh",
+   "name": "Hứa Thị Lan Anh",
+   "sex": "f",
+   "gen": 6,
+   "married": "Lấy chồng họ ... (chưa có thông tin)"
+  },
+  {
+   "id": "d6-hung2",
+   "parent": "d5-dinh",
+   "name": "Hứa Lê Trung Hưng",
+   "sex": "m",
+   "gen": 6,
+   "code": "ĐI.2.ĐII.ĐIII.4.ĐIV.1.ĐV.1.ĐVI.1",
+   "life": "Sinh năm 1969",
+   "issue": "Danh sách \"Các con\" của ông Hứa Văn Định chỉ có 2 con gái, nhưng mã đời (ĐV.1.ĐVI.1) xếp ông là con ông Định. Cần gia đình xác nhận."
+  },
+  {
+   "id": "d6-phuong",
+   "parent": "d5-my",
+   "name": "Hứa Thị Phương",
+   "sex": "f",
+   "gen": 6,
+   "life": "Sinh năm 1971",
+   "married": "Lấy chồng họ Nguyễn \"Nguyễn Vĩnh Hằng\" (họ Nguyễn Vĩnh xóm 4 Văn Hàn)"
+  },
+  {
+   "id": "d6-nhung",
+   "parent": "d5-my",
+   "name": "Hứa Thị Nhung",
+   "sex": "f",
+   "gen": 6,
+   "life": "Sinh năm 1973",
+   "married": "Lấy chồng họ Nguyễn \"Nguyễn Văn Chi\" (họ Nguyễn, Hưng Hà, Thái Bình)"
+  },
+  {
+   "id": "d6-dinh2",
+   "parent": "d5-my",
+   "name": "Hứa Thị Dinh",
+   "sex": "f",
+   "gen": 6,
+   "life": "Sinh năm 1974",
+   "married": "Lấy chồng họ Giang \"Giang Thế Trường\" (họ Giang xóm 7 Văn Hàn)"
+  },
+  {
+   "id": "d4-toan",
+   "parent": "d3-5",
+   "name": "Hứa Văn Toán",
+   "sex": "m",
+   "gen": 4,
+   "code": "ĐI.2.ĐII.ĐIII.5.ĐIV.1",
+   "gio": "3 tháng 7",
+   "spouses": [
+    {
+     "name": "Trương Thị Thưởng",
+     "life": "1908–2001",
+     "gio": "28 tháng 8",
+     "origin": "Họ Trương xóm 4 Văn Hàn"
+    }
+   ]
+  },
+  {
+   "id": "d4-sinh",
+   "parent": "d3-5",
+   "name": "Hứa Văn Sinh",
+   "sex": "m",
+   "gen": 4,
+   "code": "ĐI.2.ĐII.ĐIII.5.ĐIV.2",
+   "life": "…–1945",
+   "gio": "10 tháng 10",
+   "spouses": [
+    {
+     "name": "Vũ Thị Tách",
+     "life": "1921–2001",
+     "gio": "28 tháng 8",
+     "origin": "họ Trương xóm 4 Văn Hàn (như tài liệu)"
+    }
+   ],
+   "issue": "Vợ ông là \"Vũ Thị Tách\" nhưng lại ghi \"họ Trương xóm 4 Văn Hàn\", năm mất và ngày giỗ trùng với vợ ông Toán (2001, 28 tháng 8). Có thể do chép nhầm, cần xác nhận."
+  },
+  {
+   "id": "d4-mun",
+   "parent": "d3-6",
+   "name": "Hứa Thị Mun",
+   "sex": "f",
+   "gen": 4,
+   "married": "Lấy chồng họ Lê \"Lê Quang Khánh\" (họ Lê xóm 4 Văn Hàn)"
+  },
+  {
+   "id": "d4-ry",
+   "parent": "d3-6",
+   "name": "Hứa Văn Rỹ",
+   "sex": "m",
+   "gen": 4,
+   "life": "1928–1985",
+   "gio": "06 tháng 8",
+   "spouses": [
+    {
+     "name": "Nguyễn Thị Sáu",
+     "life": "1929–2003",
+     "gio": "08 tháng 5",
+     "origin": "Họ Nguyễn xóm 4, chi chòa nhà ông Lộng"
+    }
+   ]
+  },
+  {
+   "id": "d4-co",
+   "parent": "d3-6",
+   "name": "Hứa Văn … (chú Cò con)",
+   "sex": "m",
+   "gen": 4,
+   "life": "Mất năm 6 tuổi"
+  }
+ ],
+ "glossary": [
+  [
+   "鄧",
+   "Đặng",
+   "Họ Đặng"
+  ],
+  [
+   "賢",
+   "Hiền",
+   "Người tài đức, hiền đức"
+  ],
+  [
+   "直",
+   "Trực",
+   "Trung trực, thẳng thắn"
+  ],
+  [
+   "字",
+   "Tự",
+   "Tên tự, tên chữ"
+  ],
+  [
+   "號",
+   "Hiệu",
+   "Tên hiệu"
+  ],
+  [
+   "慈",
+   "Từ",
+   "Hiền, lành, từ thiện"
+  ],
+  [
+   "蕙",
+   "Huệ",
+   "Hoa huệ, hoa lan; người con gái có đức độ tốt"
+  ],
+  [
+   "望",
+   "Vọng",
+   "Danh vọng"
+  ],
+  [
+   "養",
+   "Dưỡng",
+   "Nuôi, nuôi nấng; có thể dùng làm tên chữ của từ Nuôi"
+  ],
+  [
+   "勰",
+   "Hiệp",
+   "Hòa hợp (thường dùng để đặt tên người)"
+  ],
+  [
+   "認",
+   "Nhận",
+   "Biết, nhận rõ, bằng lòng, công nhận"
+  ],
+  [
+   "躡",
+   "Niếp",
+   "Đi theo"
+  ],
+  [
+   "蓮",
+   "Liên",
+   "Cây sen, hoa sen"
+  ],
+  [
+   "志",
+   "Chí",
+   "Chí hướng, họ Chí"
+  ],
+  [
+   "義",
+   "Ngãi",
+   "Việc nghĩa, tình nghĩa; tên chữ của từ Ngãi"
+  ],
+  [
+   "範",
+   "Phạm",
+   "Họ Phạm"
+  ],
+  [
+   "盛",
+   "Thịnh",
+   "Thịnh vượng, phồn vinh, đẹp đẽ, phong phú, họ Thịnh"
+  ],
+  [
+   "暝",
+   "Mịnh",
+   "Mặt trời lặn, hoàng hôn; dùng để nói lái từ Minh (tránh phạm húy)"
+  ],
+  [
+   "喜",
+   "Mừng / Hỉ",
+   "Vui mừng, hoan hỉ"
+  ],
+  [
+   "惷",
+   "Xuân",
+   "Mùa xuân, xuân tươi, trẻ trung, họ Xuân"
+  ],
+  [
+   "長",
+   "Trường",
+   "Dài, lâu dài, mãi mãi"
+  ],
+  [
+   "勝",
+   "Thắng",
+   "Được, thắng, tốt đẹp"
+  ],
+  [
+   "清",
+   "Thanh",
+   "Trong sạch, liêm khiết, thanh liêm, họ Thanh"
+  ],
+  [
+   "梅",
+   "Mai",
+   "Cây hoa mai, hoa mai, quả mơ, họ Mai"
+  ],
+  [
+   "",
+   "Nhớn",
+   "Con cả (chữ Hán không hiển thị được trong tài liệu gốc)"
+  ],
+  [
+   "秭",
+   "Tỉ",
+   "Một triệu triệu (1.000.000.000.000)"
+  ],
+  [
+   "坦",
+   "Thản",
+   "Bằng phẳng, phẳng phiu, thẳng thắn"
+  ],
+  [
+   "穌(蘇)",
+   "Tô",
+   "Sống lại, tỉnh lại, cây tía tô"
+  ],
+  [
+   "恬",
+   "Điềm",
+   "Yên tĩnh, thản nhiên"
+  ],
+  [
+   "員",
+   "Vân",
+   "Dùng làm tên người"
+  ],
+  [
+   "瑳",
+   "Tha",
+   "Vẻ lộng lẫy, đẹp rực rỡ"
+  ],
+  [
+   "微",
+   "Vi",
+   "Nhỏ, bé, mầu nhiệm, tinh tế"
+  ],
+  [
+   "竇",
+   "Đậu",
+   "Họ Đậu"
+  ],
+  [
+   "明",
+   "Minh",
+   "Sáng, người sáng suốt hiền minh"
+  ],
+  [
+   "湉",
+   "Điềm",
+   "Nước phẳng lặng"
+  ],
+  [
+   "𢴾",
+   "Bơi",
+   "Bơi"
+  ],
+  [
+   "祥",
+   "Tường",
+   "Tốt lành, phúc lành, họ Tường"
+  ],
+  [
+   "子",
+   "Tý",
+   "Ngôi đầu của mười hai chi: năm Tý, tuổi Tý"
+  ],
+  [
+   "宥",
+   "Hựu",
+   "Khoan dung, tha thứ, rộng rãi sâu xa"
+  ],
+  [
+   "瑰",
+   "Côi",
+   "Một thứ đá đẹp kém hơn ngọc; đặc biệt, lạ, hiếm có. Mai côi (玫瑰): ngọc đỏ, hoa hồng"
+  ],
+  [
+   "許 氏 管",
+   "Hứa Thị Quản",
+   ""
+  ]
+ ]
+}
