@@ -4,7 +4,7 @@ window.Tree3D = (() => {
   "use strict";
   const R = 58, H = 50, LABEL = 4.4, FOV = 45 * Math.PI / 180;
   let host, cv, ctx, nodes = [], links = [], byId = new Map();
-  let hits = new Set(), selected = null, onPick = null, colors = {};
+  let hits = new Set(), selected = null, onPick = null, onToggle = null, stateOf = () => ({ visible: true, kids: 0, open: false }), colors = {};
   let W = 0, Hh = 0, dpr = 1, f = 1;
   const cam = { yaw: 0.5, pitch: 0.28, dist: 900, tx: 0, ty: 0, tz: 0, cyFrac: 0.5, cxOff: 0 };
   let anim = null, dirty = true, running = false, autoSpin = true, extent = { cx: 0, cz: 0, r: 1, h: 1 };
@@ -54,7 +54,8 @@ window.Tree3D = (() => {
     dirty = false;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.fillStyle = colors.bg; ctx.fillRect(0, 0, W, Hh);
-    const P = new Map(); nodes.forEach(n => P.set(n.id, project(n)));
+    const P = new Map(), S = new Map();
+    nodes.forEach(n => { const st = stateOf(n.id); S.set(n.id, st); P.set(n.id, st.visible ? project(n) : null); });
     ctx.strokeStyle = colors.muted; ctx.lineWidth = 1; ctx.globalAlpha = 0.55;
     ctx.beginPath();
     for (const [a, b] of links) {
@@ -72,7 +73,8 @@ window.Tree3D = (() => {
       if (fs < 4.8) { // too far away to read: draw a dot
         const r = Math.max(2.5, fs * 0.6);
         ctx.beginPath(); ctx.arc(pr.sx, pr.sy, r, 0, 7); ctx.fillStyle = fill; ctx.fill();
-        ctx.lineWidth = n.id === selected ? 2.5 : 1.2; ctx.strokeStyle = stroke; ctx.stroke();
+        const closed = S.get(n.id).kids && !S.get(n.id).open;
+        ctx.lineWidth = n.id === selected ? 2.5 : closed ? 2.4 : 1.2; ctx.strokeStyle = closed && n.id !== selected ? colors.accent : stroke; ctx.stroke();
         boxes.push({ id: n.id, x: pr.sx - r - 4, y: pr.sy - r - 4, w: 2 * r + 8, h: 2 * r + 8 });
         continue;
       }
@@ -93,6 +95,19 @@ window.Tree3D = (() => {
       ctx.font = `600 ${big}px ${font}`; ctx.fillText(name, pr.sx, y + padY);
       if (life) { ctx.font = `400 ${big * 0.8}px ${font}`; ctx.fillStyle = colors.muted; ctx.fillText(life, pr.sx, y + padY + lh); }
       boxes.push({ id: n.id, x, y, w, h });
+      // expand / collapse button under the card (children sit on the ring below)
+      const st = S.get(n.id);
+      if (st.kids) {
+        const label = st.open ? "▴ Thu gọn" : `▾ ${st.kids} con`, bf = big * 0.78;
+        ctx.font = `700 ${bf}px ${font}`;
+        const bw = ctx.measureText(label).width + bf * 1.4, bh = bf * 1.7, bx = pr.sx - bw / 2, by = y + h + big * 0.25;
+        roundRect(bx, by, bw, bh, bh / 2);
+        ctx.fillStyle = st.open ? colors.bg : colors.accent; ctx.fill();
+        ctx.lineWidth = 1.2; ctx.strokeStyle = st.open ? colors.line : colors.accent; ctx.stroke();
+        ctx.fillStyle = st.open ? colors.muted : "#fff"; ctx.textBaseline = "middle";
+        ctx.fillText(label, pr.sx, by + bh / 2 + 0.5);
+        boxes.push({ id: n.id, toggle: true, x: bx - 4, y: by - 2, w: bw + 8, h: bh + 6 });
+      }
     }
   }
 
@@ -184,7 +199,10 @@ window.Tree3D = (() => {
     const r = cv.getBoundingClientRect(), x = cx - r.left, y = cy - r.top;
     for (let i = boxes.length - 1; i >= 0; i--) {
       const b = boxes[i];
-      if (x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h) { recenter(b.id); onPick && onPick(b.id); return; }
+      if (x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h) {
+        if (b.toggle) { onToggle && onToggle(b.id); return; }
+        recenter(b.id); onPick && onPick(b.id); return;
+      }
     }
     onPick && onPick(null);
   }
@@ -200,8 +218,8 @@ window.Tree3D = (() => {
     dirty = true;
   }
 
-  function init(el, people, pickCb) {
-    host = el; onPick = pickCb;
+  function init(el, people, opts) {
+    host = el; onPick = opts.pick; onToggle = opts.toggle; stateOf = opts.state;
     cv = document.createElement("canvas"); cv.style.touchAction = "none"; cv.style.display = "block";
     host.appendChild(cv); ctx = cv.getContext("2d");
     readColors(); layout(people); resize();
@@ -219,6 +237,7 @@ window.Tree3D = (() => {
   }
   function retheme() { readColors(); dirty = true; }
 
-  const api = { init, fit, zoomBy, focus, setHits, setSelected, resize, retheme, pause, boxes: () => boxes, cam: () => ({ ...cam }) };
+  function refresh() { dirty = true; }
+  const api = { init, refresh, fit, zoomBy, focus, setHits, setSelected, resize, retheme, pause, boxes: () => boxes, cam: () => ({ ...cam }) };
   return api;
 })();

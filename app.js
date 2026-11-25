@@ -61,7 +61,15 @@
       try { await load3d(); } catch (e) { btn.disabled = false; btn.textContent = "Xem 3D"; alertBox("Không tải được chế độ 3D."); return; }
       host.hidden = false; svg.style("display", "none");
       if (!T3) {
-        T3 = window.Tree3D.init(host, DATA.people, id => id ? select(id, false) : closePanel());
+        T3 = window.Tree3D.init(host, DATA.people, {
+          pick: id => { if (!id) return closePanel(); openPerson(byId.get(id)); },
+          toggle: id => toggle(byId.get(id)),
+          state: id => {
+            const d = byId.get(id); let vis = true;
+            for (let a = d.parent; a; a = a.parent) if (!a.children) { vis = false; break; }
+            return { visible: vis, kids: d._kids ? d._kids.length : 0, open: !!d.children };
+          },
+        });
         T3.setHits(hitIds); if (selectedId) T3.setSelected(selectedId);
       } else { T3.pause(false); T3.resize(); }
       if (selectedId) setTimeout(() => T3.focus(selectedId), 120);
@@ -199,16 +207,17 @@
   // Tapping a card shows details and, if the branch is closed, opens it.
   function openPerson(d) {
     const opened = d._kids && !d.children;
-    if (opened) { d.children = d._kids; update(d); }
+    if (opened) { d.children = d._kids; update(d); T3 && T3.refresh(); }
     select(d.id);
-    if (opened) setTimeout(() => revealKids(d), DUR + 20);
+    if (opened && mode === "2d") setTimeout(() => revealKids(d), DUR + 20);
     dismissTip();
   }
 
   function toggle(d) {
     d.children = d.children ? null : d._kids;
     update(d);
-    if (d.children) setTimeout(() => revealKids(d), DUR + 20);
+    T3 && T3.refresh();
+    if (d.children && mode === "2d") setTimeout(() => revealKids(d), DUR + 20);
     if (selectedId === d.id) renderPanel(d);
     dismissTip();
   }
@@ -269,7 +278,7 @@
 
   function focusPerson(id, center = true) {
     const d = byId.get(id); if (!d) return;
-    if (mode === "3d") { select(id, false); if (center) T3.focus(id); return; }
+    if (mode === "3d") { revealPath(d); update(d.parent || d); T3.refresh(); select(id, false); if (center) T3.focus(id); return; }
     revealPath(d);
     update(d.parent || d);
     select(id, false);
@@ -373,8 +382,8 @@
     document.getElementById("fit").onclick = () => mode === "3d" ? T3.fit() : fit();
     document.getElementById("mode").onclick = () => setMode(mode === "3d" ? "2d" : "3d");
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => T3 && T3.retheme());
-    document.getElementById("expandAll").onclick = () => { expandAll(); update(root); setTimeout(fit, DUR); };
-    document.getElementById("collapseAll").onclick = () => { collapseTo(VERT ? 2 : 3); update(root); setTimeout(fit, DUR); };
+    document.getElementById("expandAll").onclick = () => { expandAll(); update(root); T3 && T3.refresh(); if (mode === "2d") setTimeout(fit, DUR); };
+    document.getElementById("collapseAll").onclick = () => { collapseTo(VERT ? 2 : 3); update(root); T3 && T3.refresh(); if (mode === "2d") setTimeout(fit, DUR); else T3.fit(); };
     document.getElementById("closePanel").onclick = closePanel;
     svg.on("click", closePanel);
     document.addEventListener("keydown", e => { if (e.key === "Escape" && !panel.hidden && document.activeElement !== q) closePanel(); });
@@ -424,7 +433,7 @@
       <ul><li>Kéo để di chuyển, cuộn chuột hoặc chụm hai ngón tay để phóng to, thu nhỏ.</li>
       <li>Nhấn vào ô tên để xem chi tiết và mở các con của người đó. Nút “▸ N con” mở nhánh, nút “Thu gọn” đóng nhánh.</li>
       <li>Trên điện thoại, cây mọc từ dưới lên: Thủy tổ ở dưới cùng, con cháu ở phía trên.</li>
-      <li>Nút “Xem 3D” chuyển sang cây 3D hình nón: kéo để xoay, chụm hoặc cuộn để phóng to, nhấn vào tên để xem chi tiết.</li>
+      <li>Nút “Xem 3D” chuyển sang cây 3D hình nón: kéo để xoay, chụm hoặc cuộn để phóng to, nhấn vào tên để xem chi tiết và mở nhánh, nút “▾ N con” / “▴ Thu gọn” dưới mỗi tên để mở hoặc đóng nhánh.</li>
       <li>Ô tìm kiếm không cần gõ dấu, ví dụ “hua van hiep”, “1944”, “xom 4”.</li></ul>
       <h3>Ghi chú về dữ liệu</h3><ul>${m.sourceNotes.map(s => `<li>${esc(s)}</li>`).join("")}</ul>
       <h3>Những chỗ cần gia đình xác nhận (${issues.length})</h3>
