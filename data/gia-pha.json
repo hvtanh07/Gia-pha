@@ -4,7 +4,7 @@
   "origin": "Làng Kênh (nay là thôn Ký Con, Đông Xuân, Đông Hưng, Thái Bình); chi họ Hứa định cư tại Văn Hàn, Thái Hưng, Thái Thụy, Thái Bình.",
   "sourceNotes": [
    "Dữ liệu chép lại từ file \"Cơ sở dữ liệu xây dựng gia phả họ Hứa\" (docx). Một số lỗi chính tả rõ ràng (ví dụ \"Hứa Vă\" → \"Hứa Văn\", \"thangs\" → \"tháng\") đã được sửa.",
-   "Số điện thoại trong tài liệu gốc không được đưa lên trang web.",
+   "Số điện thoại chép từ tài liệu gốc. Các số 11 chữ số đầu 0167 đã được nhà mạng đổi sang đầu 0367 từ năm 2018; trang hiện cả số cũ và số mới.",
    "Cụ Hứa Văn Hiệp có ba vợ, cụ Hứa Văn Tiêm có hai vợ, ông Hứa Văn Thành có hai vợ; tài liệu không ghi rõ con nào của bà nào.",
    "Cuối tài liệu có mục \"Hứa Văn Tường\" lặp lại và một dòng \"Hứa Thị Quản (許 氏 管)\" không rõ vị trí; mục lặp được bỏ qua.",
    "Phần \"Tham khảo tự điển Hán Việt cổ đại\" ở cuối tài liệu được đưa vào mục Chú giải chữ Hán."
@@ -919,14 +919,21 @@
    "name": "Hứa Thị Hoa",
    "sex": "f",
    "gen": 6,
-   "life": "Sinh năm 1974"
+   "life": "Sinh năm 1974",
+   "phone": [
+    "01677864829",
+    "0367864829"
+   ]
   },
   {
    "id": "d6-huong2",
    "parent": "d5-qui",
    "name": "Hứa Thị Hường",
    "sex": "f",
-   "gen": 6
+   "gen": 6,
+   "phone": [
+    "0947421060"
+   ]
   },
   {
    "id": "d6-hoa2",
@@ -942,6 +949,9 @@
      "life": "Sinh năm 1983",
      "origin": "Họ Vũ, Nghĩa Hưng, Nam Định"
     }
+   ],
+   "phone": [
+    "0979954914"
    ]
   },
   {
@@ -973,7 +983,11 @@
      "life": "Sinh năm 1983"
     }
    ],
-   "note": "Mục riêng của ông chưa điền đủ thông tin."
+   "note": "Mục riêng của ông chưa điền đủ thông tin.",
+   "phone": [
+    "01678180588",
+    "0367180588"
+   ]
   },
   {
    "id": "d6-tuanh",

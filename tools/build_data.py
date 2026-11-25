@@ -5,11 +5,11 @@ import json, sys
 
 people = []
 def P(id, parent, name, sex="m", gen=None, code=None, life=None, gio=None,
-      spouses=None, place=None, note=None, married=None, adopted=False, issue=None):
+      spouses=None, place=None, note=None, married=None, adopted=False, issue=None, phone=None):
     people.append({k: v for k, v in dict(
         id=id, parent=parent, name=name, sex=sex, gen=gen, code=code, life=life,
         gio=gio, spouses=spouses, place=place, note=note, married=married,
-        adopted=adopted or None, issue=issue).items() if v not in (None, [], "")})
+        adopted=adopted or None, issue=issue, phone=phone).items() if v not in (None, [], "")})
 
 def S(name, life=None, gio=None, origin=None, note=None):
     return {k: v for k, v in dict(name=name, life=life, gio=gio, origin=origin, note=note).items() if v}
@@ -158,13 +158,13 @@ P("d6-huy", "d5-qui", "Hứa Văn Huy", gen=6, code="ĐI.2.ĐII.ĐIII.2.ĐIV.2.�
   spouses=[S("Hà Thị Thu Hằng", origin="Họ Hà, Hùng Quan, Đoan Hùng, Phú Thọ")])
 P("d7-tanh", "d6-huy", "Hứa Văn Tuấn Anh", gen=7, life="Sinh năm 1999")
 P("d7-hieu", "d6-huy", "Hứa Minh Hiếu", gen=7, life="Sinh năm 2004")
-P("d6-hoa", "d5-qui", "Hứa Thị Hoa", "f", gen=6, life="Sinh năm 1974")
-P("d6-huong2", "d5-qui", "Hứa Thị Hường", "f", gen=6)
-P("d6-hoa2", "d5-qui", "Hứa Văn Hóa", gen=6, code="ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.3.ĐVI.2", life="Sinh năm 1980",
+P("d6-hoa", "d5-qui", "Hứa Thị Hoa", "f", gen=6, life="Sinh năm 1974", phone=["01677864829", "0367864829"])
+P("d6-huong2", "d5-qui", "Hứa Thị Hường", "f", gen=6, phone=["0947421060"])
+P("d6-hoa2", "d5-qui", "Hứa Văn Hóa", gen=6, code="ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.3.ĐVI.2", life="Sinh năm 1980", phone=["0979954914"],
   spouses=[S("Vũ Thị Liêm", "Sinh năm 1983", origin="Họ Vũ, Nghĩa Hưng, Nam Định")])
 P("d7-hai", "d6-hoa2", "Hứa Văn Hải", gen=7, life="Sinh năm 2008")
 P("d7-nam", "d6-hoa2", "Hứa Phương Nam", gen=7, life="Sinh năm 2013")
-P("d6-hoang", "d5-qui", "Hứa Văn Hoàng", gen=6, code="ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.3.ĐVI.3",
+P("d6-hoang", "d5-qui", "Hứa Văn Hoàng", gen=6, code="ĐI.2.ĐII.ĐIII.2.ĐIV.2.ĐV.3.ĐVI.3", phone=["01678180588", "0367180588"],
   spouses=[S("Chưa rõ tên", "Sinh năm 1983")], note="Mục riêng của ông chưa điền đủ thông tin.")
 
 P("d6-tuanh", "d5-ty", "Hứa Hà Tú Anh", "f", gen=6, life="Sinh năm 1980",
@@ -233,7 +233,7 @@ meta = {
     "origin": "Làng Kênh (nay là thôn Ký Con, Đông Xuân, Đông Hưng, Thái Bình); chi họ Hứa định cư tại Văn Hàn, Thái Hưng, Thái Thụy, Thái Bình.",
     "sourceNotes": [
         "Dữ liệu chép lại từ file \"Cơ sở dữ liệu xây dựng gia phả họ Hứa\" (docx). Một số lỗi chính tả rõ ràng (ví dụ \"Hứa Vă\" → \"Hứa Văn\", \"thangs\" → \"tháng\") đã được sửa.",
-        "Số điện thoại trong tài liệu gốc không được đưa lên trang web.",
+        "Số điện thoại chép từ tài liệu gốc. Các số 11 chữ số đầu 0167 đã được nhà mạng đổi sang đầu 0367 từ năm 2018; trang hiện cả số cũ và số mới.",
         "Cụ Hứa Văn Hiệp có ba vợ, cụ Hứa Văn Tiêm có hai vợ, ông Hứa Văn Thành có hai vợ; tài liệu không ghi rõ con nào của bà nào.",
         "Cuối tài liệu có mục \"Hứa Văn Tường\" lặp lại và một dòng \"Hứa Thị Quản (許 氏 管)\" không rõ vị trí; mục lặp được bỏ qua.",
         "Phần \"Tham khảo tự điển Hán Việt cổ đại\" ở cuối tài liệu được đưa vào mục Chú giải chữ Hán."

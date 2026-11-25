@@ -305,7 +305,7 @@
     let h = `<h2>${esc(p.name)}</h2>
       <div>${gen ? `<span class="tag">${esc(gen)}</span>` : ""}${p.code ? `<span class="tag">${esc(p.code)}</span>` : ""}
       <span class="tag">${p.sex === "f" ? "Nữ" : "Nam"}</span>${p.adopted ? `<span class="tag">Con nuôi</span>` : ""}</div>
-      <dl>${row("Năm sinh – mất", p.life)}${row("Ngày giỗ", p.gio)}${row("Nơi ở", p.place)}${row("Hôn nhân", p.married)}${row("Ghi chú", p.note)}</dl>`;
+      <dl>${row("Năm sinh – mất", p.life)}${phoneRow(p.phone)}${row("Ngày giỗ", p.gio)}${row("Nơi ở", p.place)}${row("Hôn nhân", p.married)}${row("Ghi chú", p.note)}</dl>`;
     if (p.issue) h += `<div class="issue"><b>Cần xác nhận:</b> ${esc(p.issue)}</div>`;
     if (p.spouses?.length) {
       h += `<h3>${spouseLabel}</h3>` + p.spouses.map(s => `<div class="spouse"><b>${esc(s.name)}</b>
@@ -322,6 +322,12 @@
     panelBody.innerHTML = h;
     panelBody.scrollTop = 0; panel.scrollTop = 0;
   }
+  function phoneRow(ph) {
+    if (!ph || !ph.length) return "";
+    const [orig, now] = ph, call = now || orig;
+    const label = now ? `${esc(now)} <span class="old">(tài liệu ghi ${esc(orig)})</span>` : esc(orig);
+    return `<dt>Điện thoại</dt><dd><a class="tel" href="tel:${esc(call)}">${label}</a></dd>`;
+  }
   function chip(n) { return `<button class="chip ${n.data.sex}" data-id="${esc(n.id)}">${esc(n.data.name)}</button>`; }
 
   // ---------- search ----------
@@ -331,7 +337,7 @@
     for (const d of byId.values()) {
       const p = d.data;
       INDEX.push({ id: d.id, label: p.name, sub: [genName(p.gen), p.life, p.parent && "con " + byId.get(p.parent).data.name].filter(Boolean).join(" · "),
-        key: fold(p.name), extra: fold([p.life, p.gio, p.place, p.married, p.note, p.code].join(" ")) });
+        key: fold(p.name), extra: fold([p.life, p.gio, p.place, p.married, p.note, p.code, ...(p.phone || [])].join(" ")) });
       (p.spouses || []).forEach(s => INDEX.push({ id: d.id, label: s.name, sub: `${p.sex === "f" ? "Chồng" : "Vợ"} của ${p.name}`,
         key: fold(s.name), extra: fold([s.life, s.gio, s.origin].join(" ")) }));
     }

@@ -144,6 +144,8 @@ body.is3d .hint3d { display: block; position: absolute; top: 10px; right: 12px; 
 .panel dl { margin: 14px 0 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 12px; font-size: 14px; }
 .panel dt { color: var(--muted); }
 .panel dd { margin: 0; }
+.panel a.tel { color: var(--accent); font-weight: 600; text-decoration: none; }
+.panel a.tel .old { color: var(--muted); font-weight: 400; font-size: 12px; }
 .panel h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin: 18px 0 6px; }
 .panel .spouse { padding: 8px 10px; border-radius: 10px; background: var(--bg); margin-bottom: 6px; font-size: 14px; }
 .panel .spouse b { display: block; }
